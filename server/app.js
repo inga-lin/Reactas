@@ -24,7 +24,7 @@ const con = mysql.createConnection({
 //jis nurodo kokius puslapus paleidzia routas http://localhost:3003/ http://localhost:3003/trees-manager
 
 app.get('/', (req, res) => {
-  res.send('Hello Bebrai!')
+  res.send('Hello Bebraiiii!')
 })
 
 
