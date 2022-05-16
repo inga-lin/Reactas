@@ -15,7 +15,10 @@ function App() {
       <header className="App-header">
         <h1>Labas</h1>
         {
-          trees.map(t => t.name !== 'Pusis' ? (<div key={t.id}>{t.name}</div>) : '')
+          trees.map(t => t.name !== 'Egle' ? (<div key={t.id}>{t.name}</div>) : '')
+        }
+                {
+          trees.map(t => <div key={t.id}>{t.name}</div>)
         }
       </header>
     </div>
