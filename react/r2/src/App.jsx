@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'; //nepamirsti useState prirasyti cia !!!
 import axios from 'axios';
+import './bootstrap.css';
 import './App.css';
+import Create from './Components/Create';
 function App() {
   const [trees, setTrees] = useState([]);
   useEffect( () => {
@@ -11,14 +13,29 @@ function App() {
     })
   },[]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Labas</h1>
-        {
-          trees.map(t => t.name !== 'Egle' ? (<div key={t.id}>{t.name}</div>) : '')
-        }
+    <div className="container">
+      <div className="row">
+        <div className="col-4">
+          <Create></Create>
+        </div>
+        <div className="col-8">
 
-      </header>
+          <div className="card m-4">
+            <div className="card-header">
+              Tree List
+            </div>
+            <div className="card-body">
+
+              <ul className="list-group">
+
+                {
+                  trees.filter(t => t.name !== 'Agrastas').map(t => <li className="list-group-item" key={t.id}>{t.name}</li>)
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
