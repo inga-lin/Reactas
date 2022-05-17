@@ -17,12 +17,7 @@ function App() {
         {
           trees.map(t => t.name !== 'Egle' ? (<div key={t.id}>{t.name}</div>) : '')
         }
-        {
-          trees.map(t => <div key={t.id}>{t.name}</div>)
-        }
-        {
-          trees.sort((a,b) => a.name.length > b.name.length ? -1 : 1 ).map(t => <div key={t.id}>{t.name}</div>)
-        }
+
       </header>
     </div>
   );
@@ -30,6 +25,13 @@ function App() {
 export default App;
 
 /*
+        {
+          trees.map(t => <div key={t.id}>{t.name}</div>)
+        }
+        {
+          trees.sort((a,b) => a.name.length > b.name.length ? -1 : 1 ).map(t => <div key={t.id}>{t.name}</div>)
+        }
+
 padaro raudonus kvadratus aplink zodzius:
         {
           trees.map(t => <div key={t.id} style={{backgroundColor: 'red', height: '150px', width:"150px"}}>{t.name}</div>)
