@@ -1,17 +1,23 @@
-import { useEffect, useState } from 'react'; //nepamirsti useState prirasyti cia !!!
+
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './bootstrap.css';
-import './App.css';
+import './App.scss';
 import Create from './Components/Create';
+
+
 function App() {
+
   const [trees, setTrees] = useState([]);
-  useEffect( () => {
+
+  useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
-    .then(res => {
-      console.log(res.data);
-      setTrees(res.data)
-    })
-  },[]);
+      .then(res => {
+        console.log(res.data);
+        setTrees(res.data);
+      })
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
@@ -19,15 +25,12 @@ function App() {
           <Create></Create>
         </div>
         <div className="col-8">
-
-          <div className="card m-4">
+          <div className="card m-2">
             <div className="card-header">
-              Tree List
+              <h2>Tree List</h2>
             </div>
             <div className="card-body">
-
               <ul className="list-group">
-
                 {
                   trees.filter(t => t.name !== 'Agrastas').map(t => <li className="list-group-item" key={t.id}>{t.name}</li>)
                 }
@@ -39,6 +42,7 @@ function App() {
     </div>
   );
 }
+
 export default App;
 
 /*
