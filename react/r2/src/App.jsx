@@ -17,8 +17,11 @@ function App() {
         {
           trees.map(t => t.name !== 'Egle' ? (<div key={t.id}>{t.name}</div>) : '')
         }
-                {
+        {
           trees.map(t => <div key={t.id}>{t.name}</div>)
+        }
+        {
+          trees.sort((a,b) => a.name.length > b.name.length ? -1 : 1 ).map(t => <div key={t.id}>{t.name}</div>)
         }
       </header>
     </div>
@@ -26,7 +29,46 @@ function App() {
 }
 export default App;
 
+/*
+padaro raudonus kvadratus aplink zodzius:
+        {
+          trees.map(t => <div key={t.id} style={{backgroundColor: 'red', height: '150px', width:"150px"}}>{t.name}</div>)
+        }
+turetu atvaizduoti nuo didziausio iki maziausio
+        {
+          trees.sort((a,b) => a.name.length > b.name.length ? -1 : 1 ).map(t => <div key={t.id}>{t.name}</div>)
+        }
+neveikia....
+        {
+          dogs.sort((a,b) => b.name.length - a.name.length).map((dogs, i) => <DogsSkai key={i} dogs={dogs} number={i + 1 } >{dogs}</DogsSkai>) //isrusiavom sunis nuo ilgiausio pavadinimo iki trumpiausio
+        } 
+//Atvaizduoti masyvą dogs. Poriniuose indeksuose esančius šunis atvaizduoti kvadratuose, neporinius trikampiuose (trikampio css pasigooglint).
+        {
+          dogs.map((dogs, i) => i % 2 !== 0 ? (<DogsKvad key={i} dogs={dogs} ></DogsKvad>) : (<DogsTrikam key={i} dogs={dogs} ></DogsTrikam>))
+        }
 
+export default function DogsTrikam({dogs}) {
+   
+    return (
+        <div>
+            <h1 style={{color:'pink',width:'0px', height:'0px', borderBottom:'170px solid red', borderLeft:'170px solid transparent' }}>{dogs}</h1>      
+        </div>
+
+    )
+
+}
+//Atvaizduoti masyvą dogs. Šunis, kurie prasideda didžiąja raide praleisti (neatvaizduoti).
+        {
+            trees.map(trees => trees.name[0].toLowerCase() === trees[0] ? (<div key={trees.id}>{trees.name}</div>) : (''))
+        }
+
+//Naudojant masyvą dogs atvaizduoti skaičius, kurie yra lygūs žodžių masyve ilgiui. Skaičius, didesnius nei 6 atvaizduoti žaliai, kitus raudonai.
+
+//Abu variantai veikia
+//dogs.map((dogs, i) =>  <h1 style={{color: dogs.length > 6 ? 'green':'red' }} key={i} dogs={dogs.length} >{dogs.length}</h1>)
+//dogs.map((dogs, i) => dogs.length > 6 ? (<h1 key={i} style={{color:'green'}}>{dogs.length}</h1>):(<h1 key={i} style={{color:'red'}}>{dogs.length}</h1>))
+
+*/
 /*xamp start-> start-> Admin
 http://localhost/phpmyadmin/
 phpMyAdmin
