@@ -152,15 +152,30 @@ terminale dar karta spaudziam +
 ccd react
 cd r2
 npm i axios
-
-kaip pasileistu kad veiktu puslapis(kai pradedam darba)
+-----------------------------------
+kaip pasileistu kad veiktu puslapis(kai pradedam darba):
 (serverio dalis)
 ir grystam i pirma node arba powershell
 ir dirbam Reactas/server
 npm start
+(matyrumem taip langa mazdaug pries pasileidziant
+[nodemon] 2.0.16
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node app.js`
+Example app listening on port 3003)
+
 
 (fronto dalis)
 o antrame node arba powershell
 react/r2 
 npm start
+(matyrumem taip langa mazdaug pries pasileidziant
+You can now view r2 in the browser.
+Local:            http://localhost:3000        
+On Your Network:  http://172.17.254.132:3000   
+Note that the development build is not optimized.
+To create a production build, use npm run build. 
+webpack compiled successfully)
 */
