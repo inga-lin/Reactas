@@ -1,23 +1,31 @@
 import { useState } from "react";
 
-function Create () {
+function Create({setCreateData}) {
 
-    const [ title, setTitle] = useState('');
-    const [ height, setHeight] = useState('');
-    const [ type, setType] = useState('1');
+    const [title, setTitle] = useState('');
+    const [height, setHeight] = useState('');
+    const [type, setType] = useState('1');
 
-    const inputHandler = (e,which ) => {
+    const buttonHandler = () => {
+        setCreateData({
+            title,
+            height,
+            type
+        });
+    }
+
+    const inputHandler = (e, which) => {
         switch(which) {
-            case 'title':
-                setTitle(e.target.value);
-                break;
-            case 'height':
-                setHeight(e.target.value.replace(/,/g, '.'));
-                break;
-                case 'type':
-                    setType(e.target.value);
-                    break;
-                    default:
+            case 'title': 
+            setTitle(e.target.value);
+            break;
+            case 'height': 
+            setHeight(e.target.value.replace(/,/g, '.'));
+            break;
+            case 'type': 
+            setType(e.target.value);
+            break;
+            default:
         }
     }
 
@@ -41,34 +49,23 @@ function Create () {
                                 <small className="form-text text-muted">Tree height.</small>
                             </div>
                         </div>
+                        <div className="col-8">
+                            <div className="form-group">
+                                <label>Tree type</label>
+                                <select className="form-control" onChange={e => inputHandler(e, 'type')} value={type}>
+                                    <option value="1">Leaf</option>
+                                    <option value="2">Spike</option>
+                                    <option value="3">Palm</option>
+                                </select>
+                                <small className="form-text text-muted">Tree type.</small>
+                            </div>
+                        </div>
+                        <div className="buttons">
+                        <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Add</button>
+                        </div>
                     </div>
                 </div>
-                <div className="col-8">
-                <div className="form-group">
-
-<label>Tree type</label>
-
-<select className="form-control" onChange={e => inputHandler(e, 'type')} value={type}>
-
-    <option value="1">Leaf</option>
-
-    <option value="2">Spike</option>
-
-    <option value="3">Palm</option>
-
-</select>
-
-<small className="form-text text-muted">Tree type.</small>
-
-</div>
-
-                </div>
-                <div className="buttons">
-                    <button type="button" className="btn btn-primary m3">Add</button>
-                </div>
-                
             </div>
-            
         </div>
     )
 }

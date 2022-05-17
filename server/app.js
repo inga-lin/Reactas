@@ -43,6 +43,32 @@ app.get('/trees-manager', (req, res) => {
 
 });
 
+app.post('/trees-manager', (req, res) => {
+    // INSERT INTO table_name (column1, column2, column3, ...)
+    // VALUES (value1, value2, value3, ...);
+    const sql = `
+        INSERT INTO trees
+        (name, height, type)
+        VALUES (?, ?, ?)
+    `;
+
+    con.query(sql, [
+        req.body.title,
+        req.body.height,
+        req.body.type
+    ], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+
+});
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

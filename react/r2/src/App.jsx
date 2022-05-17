@@ -10,6 +10,8 @@ function App() {
 
   const [trees, setTrees] = useState([]);
 
+  const [createData, setCreateData] = useState(null);
+
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
       .then(res => {
@@ -18,11 +20,22 @@ function App() {
       })
   }, []);
 
+  useEffect(() => {
+    if (null === createData) {
+      return;
+    }
+    axios.post('http://localhost:3003/trees-manager', createData)
+    .then(res => console.log(res));
+
+  },[createData])
+
+
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <Create></Create>
+          <Create setCreateData={setCreateData}></Create>
         </div>
         <div className="col-8">
           <div className="card m-2">
