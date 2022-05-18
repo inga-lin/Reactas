@@ -17,6 +17,10 @@ function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is 
             height,
             type
         });
+        setTitle('');
+        setHeight('');
+        setType(1)
+
     }//4)ir ji perduodam i buttona onClick={buttonHandler} ir einam i server-App.js
 
     //2)apsirasom funkcija kuri gauna event(is pildomos lenteles(Add New Tree)) ir which-kuri norim kad jis kontruoliuotu

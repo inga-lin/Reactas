@@ -4,6 +4,7 @@ import axios from 'axios';
 import './bootstrap.css';
 import './App.scss';
 import Create from './Components/Create';
+import TreeLine from './Components/TreeLine';
 
 // cia Tree List lentele
 
@@ -13,13 +14,18 @@ function App() {
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   const [createData, setCreateData] = useState(null);
 
+  const [deleteId, setDeleteId] = useState(null);
+
+  const [lastUpdate, setLastUpdate] = useState(Date.now()); //cia bus data kada pirma uzsikrauna puslapis
+
+
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
       .then(res => {
         console.log(res.data);
         setTrees(res.data);//padarom kad per cia pasiimam savo trees is serverio
       })
-  }, []);
+  }, [lastUpdate]);
 
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   //3)useEffect pas mus vyks kai pasikeis creatoData
@@ -28,9 +34,22 @@ function App() {
       return;
     }
     axios.post('http://localhost:3003/trees-manager', createData)//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData
-    .then(res => console.log(res));  //3)console.log(res) pasiziurim ka mums servas atsakys
-
+    .then(res => {
+      console.log(res);  //3)console.log(res) pasiziurim ka mums servas atsakys
+      setLastUpdate(Date.now()) });
   },[createData])
+
+  //
+  useEffect(() => {
+    if (null === deleteId) { //3)jeigu createData yra === null nieko nedarom ir einam lauk is cia
+      return;
+    }
+    axios.delete('http://localhost:3003/trees-manager/' + deleteId.id, )//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData
+    .then(res => {
+      console.log(res);  //3)console.log(res) pasiziurim ka mums servas atsakys
+      setLastUpdate(Date.now());
+     });
+  },[deleteId])
 
 
 
@@ -48,7 +67,7 @@ function App() {
             <div className="card-body">
               <ul className="list-group">
                 {
-                  trees.filter(t => t.name !== 'Agrastas').map(t => <li className="list-group-item" key={t.id}>{t.name}</li>)
+                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId}></TreeLine>)
                 }
               </ul>
             </div>
