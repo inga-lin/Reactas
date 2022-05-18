@@ -57,7 +57,7 @@ app.post('/trees-manager', (req, res) => {
 
     con.query(sql, [ //cia tvarka turi sutapt su lenteles uzrasais, ir is cia paimam ta nauja info ir sudedam i musu serveri ir po to matysim tai Tree List (paspaudus App mygtuka ir perkrovus puslapi)
         req.body.title,
-        req.body.height,
+        !req.body.height ? 0 : req.body.height, //jeigu aukscio lenteleje nieko neirasysim bus 0
         req.body.type
     ], (err, results) => {
         if (err) {
