@@ -14,6 +14,7 @@ function App() {
   const [trees, setTrees] = useState([]);
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   const [createData, setCreateData] = useState(null);
+  const [editData, setEditData] = useState(null);
 
   const [deleteId, setDeleteId] = useState(null);
 
@@ -44,16 +45,29 @@ function App() {
 
   //
   useEffect(() => {
-    if (null === deleteId) { //3)jeigu createData yra === null nieko nedarom ir einam lauk is cia
+    if (null === editData) {
       return;
     }
-    axios.delete('http://localhost:3003/trees-manager/' + deleteId.id, )//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData
+    axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData)
     .then(res => {
-      console.log(res);  //3)console.log(res) pasiziurim ka mums servas atsakys
+      console.log(res);
       setLastUpdate(Date.now());
-     });
-  },[deleteId])
+    });
 
+  },[editData]);
+
+
+  useEffect(() => {
+    if (null === editData) {
+      return;
+    }
+    axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData)
+    .then(res => {
+      console.log(res);
+      setLastUpdate(Date.now());
+    });
+
+  },[editData]);
 
 
   return (
@@ -79,7 +93,7 @@ function App() {
         </div>
       </div>
     </div>
-      <Modal setModalData={setModalData} modalData={modalData}></Modal>
+      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>
     </>
   );
 }

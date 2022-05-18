@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-function Modal({setModalData, modalData}) {
+function Modal({setModalData, modalData, setEditData}) {
 
     const [title, setTitle] = useState('');
     const [height, setHeight] = useState('');
     const [type, setType] = useState('1');
+    const [id, setId] = useState('0');
 
     const buttonHandler = () => {
-        // setCreateData({
-        //     title,
-        //     height,
-        //     type
-        // });
-        setTitle('');
-        setHeight('');
-        setType(1);
+        setEditData({
+            title,
+            height,
+            type,
+            id
+        });
+        setModalData(null);
     }
 
     const inputHandler = (e, which) => {
@@ -32,20 +32,20 @@ function Modal({setModalData, modalData}) {
     }
 
     useEffect(() => {
-       if (modalData === null){
-        setTitle('');
-        setHeight('');
-        setType(1);
-       } else {
-        setTitle(modalData.name);
-        setHeight(modalData.height);
-        setType(modalData.type);
-       }
-    },[modalData])
+        if (modalData === null) {
+            setTitle('');
+            setHeight('');
+            setType(1);
+        } else {
+            setTitle(modalData.name);
+            setHeight(modalData.height);
+            setType(modalData.type);
+            setId(modalData.id);
+        }
+    }, [modalData])
 
-    if (modalData === null){
+    if (modalData === null) {
         return null;
-        
     }
 
     return (
@@ -92,7 +92,7 @@ function Modal({setModalData, modalData}) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Save</button>
-                        <button type="button" className="btn btn-outline-danger m-3" onClick={() => setModalData(null)}>Cancel</button>
+                        <button type="button" className="btn btn-outline-danger m-3"  onClick={() => setModalData(null)}>Cancel</button>
                     </div>
                 </div>
             </div>

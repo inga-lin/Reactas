@@ -1,4 +1,4 @@
-function TreeLine({tree, setDeleteId, setModalData}){
+function TreeLine({ tree, setDeleteId, setModalData }) {
 
     return (
         <li className="list-group-item">
@@ -15,4 +15,5 @@ function TreeLine({tree, setDeleteId, setModalData}){
         </li>
     )
 }
+
 export default TreeLine;

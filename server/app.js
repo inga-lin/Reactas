@@ -84,6 +84,29 @@ app.delete('/trees-manager/:id', (req, res) => {
     })
 })
 
+// Redaguoja gyvuna
+// UPDATE table_name
+// SET column1 = value1, column2 = value2, ...
+// WHERE condition;
+app.put('/trees-manager/:id', (req, res) => {
+    const sql = `
+        UPDATE trees
+        SET name = ?, height = ?, type = ?
+        WHERE id = ?
+    `;
+    con.query(sql, [
+        req.body.title,
+        req.body.height,
+        req.body.type,
+        req.params.id
+    ], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
 
 
 
