@@ -9,7 +9,7 @@ import Create from './Components/Create';
 function App() {
 
   const [trees, setTrees] = useState([]);
-
+  //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   const [createData, setCreateData] = useState(null);
 
   useEffect(() => {
@@ -20,12 +20,14 @@ function App() {
       })
   }, []);
 
+  //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
+  //3)useEffect pas mus vyks kai pasikeis creatoData
   useEffect(() => {
-    if (null === createData) {
+    if (null === createData) { //3)jeigu createData yra === null nieko nedarom ir einam lauk is cia
       return;
     }
-    axios.post('http://localhost:3003/trees-manager', createData)
-    .then(res => console.log(res));
+    axios.post('http://localhost:3003/trees-manager', createData)//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData
+    .then(res => console.log(res));  //3)console.log(res) pasiziurim ka mums servas atsakys
 
   },[createData])
 
@@ -35,7 +37,7 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <Create setCreateData={setCreateData}></Create>
+          <Create setCreateData={setCreateData}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
         </div>
         <div className="col-8">
           <div className="card m-2">

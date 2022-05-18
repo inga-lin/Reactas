@@ -1,20 +1,21 @@
 import { useState } from "react";
 
-function Create({setCreateData}) {
+function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is App.jsx*/}
     //kadangi turim 3 irasymo laukelius tai turim juos sukontroliuoti(Tree title)
     const [title, setTitle] = useState('');//(Tree title-)
     const [height, setHeight] = useState('');//(Tree height)
     const [type, setType] = useState('1');//(Tree type ir kadangi jis uzstatytas su pasirinkimu tai parasom '1')
     // 1)ir i visus imputus surasomju reiksmes (value={title}, value={type}, value={type})
 
-    
+    //4kai paspaudziam mygtuka mes i serveri isiunvcia informacija apie nauja suvesta zmogaus irasa
+    //4kas nutinka kai paspaudziam ant mygtuko
     const buttonHandler = () => {
-        setCreateData({
+        setCreateData({ //4cia sukonstruojam objekta kuris vissiskai turi atitikti pagal musu serverio lenteles pavadinimus(vietoje title turetu buti name pagal mano serveri) o id nereik nes serveris automatiskai ji sukuria
             title,
             height,
             type
         });
-    }
+    }//4)ir ji perduodam i buttona onClick={buttonHandler} ir einam i server-App.js
 
     //2)apsirasom funkcija kuri gauna event(is pildomos lenteles(Add New Tree)) ir which-kuri norim kad jis kontruoliuotu
     //per cia galesim rasyti i lentele

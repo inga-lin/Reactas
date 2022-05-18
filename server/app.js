@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
   res.send('Hello Bebraiiii!')
 })
 
-
+//kaip nuskaito
 app.get('/trees-manager', (req, res) => {
     // SELECT column1, column2, ...
-    // FROM table_name;
+    // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
     const sql = `
         SELECT
         *
@@ -42,17 +42,20 @@ app.get('/trees-manager', (req, res) => {
     });
 
 });
-
+//5)kaip iraso nauja info i duomenu baze
 app.post('/trees-manager', (req, res) => {
     // INSERT INTO table_name (column1, column2, column3, ...)
     // VALUES (value1, value2, value3, ...);
+    //(INSERT INTO trees-musu duomenu bazes pavadinimas)
+    //(name, height, type)- musu duomenu bazes lenteles stulpeliu pavadinimai
+    //VALUES (?, ?, ?) -paruosiam vieta deti duomenim
     const sql = `
         INSERT INTO trees
         (name, height, type)
         VALUES (?, ?, ?)
     `;
 
-    con.query(sql, [
+    con.query(sql, [ //cia tvarka turi sutapt su lenteles uzrasais, ir is cia paimam ta nauja info ir sudedam i musu serveri ir po to matysim tai Tree List (paspaudus App mygtuka ir perkrovus puslapi)
         req.body.title,
         req.body.height,
         req.body.type
