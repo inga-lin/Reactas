@@ -5,6 +5,7 @@ import './bootstrap.css';
 import './App.scss';
 import Create from './Components/Create';
 import TreeLine from './Components/TreeLine';
+import Modal from './Components/Modal';
 
 // cia Tree List lentele
 
@@ -15,6 +16,8 @@ function App() {
   const [createData, setCreateData] = useState(null);
 
   const [deleteId, setDeleteId] = useState(null);
+
+  const [modalData, setModalData] = useState(null);
 
   const [lastUpdate, setLastUpdate] = useState(Date.now()); //cia bus data kada pirma uzsikrauna puslapis
 
@@ -54,6 +57,7 @@ function App() {
 
 
   return (
+    <>
     <div className="container">
       <div className="row">
         <div className="col-4">
@@ -67,7 +71,7 @@ function App() {
             <div className="card-body">
               <ul className="list-group">
                 {
-                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId}></TreeLine>)
+                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData}></TreeLine>)
                 }
               </ul>
             </div>
@@ -75,6 +79,8 @@ function App() {
         </div>
       </div>
     </div>
+      <Modal setModalData={setModalData} modalData={modalData}></Modal>
+    </>
   );
 }
 
