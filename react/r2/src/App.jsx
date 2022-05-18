@@ -16,7 +16,7 @@ function App() {
     axios.get('http://localhost:3003/trees-manager')
       .then(res => {
         console.log(res.data);
-        setTrees(res.data);
+        setTrees(res.data);//padarom kad per cia pasiimam savo trees is serverio
       })
   }, []);
 
@@ -256,4 +256,28 @@ On Your Network:  http://172.17.254.132:3000
 Note that the development build is not optimized.
 To create a production build, use npm run build. 
 webpack compiled successfully)
+*/
+/*bootstrap linkas
+https://getbootstrap.com/docs/4.6/components/buttons/ 
+
+Susikuriam react/r2 folderi Components ir jame folderiuka Create.jsx
+
+fonts   font-family:
+https://.google.com/specimen/Akshar
+ir is ten nukopinam <link.....> ir ji ikopinam i react/r2/public/index.html , kur nors <heado> viduje
+ir tada 
+body {
+  font-family: 'Akshar', sans-serif;
+}
+isimetam i src App.css
+      arba
+isirasom scss:
+App.css pervadinam i App.scss
+tada App.jsx vietoje importo App.css irasom import './App.scss';
+terminala su scss ismetam i siuksliu deze(kur node raso kaireje-front-endo dali)
+ir spaudziam + terminale
+nueinam i recta/r2
+npm i sass   (cia galim rasyti kaip css failiuke, gal :D )
+npm start
+turetu uzsikraut be klaidu
 */

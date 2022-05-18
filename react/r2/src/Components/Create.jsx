@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 function Create({setCreateData}) {
+    //kadangi turim 3 irasymo laukelius tai turim juos sukontroliuoti(Tree title)
+    const [title, setTitle] = useState('');//(Tree title-)
+    const [height, setHeight] = useState('');//(Tree height)
+    const [type, setType] = useState('1');//(Tree type ir kadangi jis uzstatytas su pasirinkimu tai parasom '1')
+    // 1)ir i visus imputus surasomju reiksmes (value={title}, value={type}, value={type})
 
-    const [title, setTitle] = useState('');
-    const [height, setHeight] = useState('');
-    const [type, setType] = useState('1');
-
+    
     const buttonHandler = () => {
         setCreateData({
             title,
@@ -14,18 +16,20 @@ function Create({setCreateData}) {
         });
     }
 
+    //2)apsirasom funkcija kuri gauna event(is pildomos lenteles(Add New Tree)) ir which-kuri norim kad jis kontruoliuotu
+    //per cia galesim rasyti i lentele
     const inputHandler = (e, which) => {
         switch(which) {
-            case 'title': 
+            case 'title': //jeigu jis yra title tai tada setinam tai ka gaunam is setTitle(e.target.value);
             setTitle(e.target.value);
             break;
-            case 'height': 
+            case 'height': //jeigu jis yra 'height' tai tada setinam tai ka gaunam is setHeight(e.target.value.replace(/,/g, '.')-sitas padaro kad kablelius pavestu i taska);
             setHeight(e.target.value.replace(/,/g, '.'));
             break;
-            case 'type': 
+            case 'type': //jeigu jis yra 'type' tai tada setinam tai ka gaunam is setType(e.target.value);;
             setType(e.target.value);
             break;
-            default:
+            default: //ir juos sukisam irgi i imputus(onChange={e => inputHandler(e, 'title')},onChange={e => inputHandler(e, 'height')}, onChange={e => inputHandler(e, 'type')})
         }
     }
 
