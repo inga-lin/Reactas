@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+//cia Add New Tree lentele
+
 function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is App.jsx*/}
     //kadangi turim 3 irasymo laukelius tai turim juos sukontroliuoti(Tree title)
     const [title, setTitle] = useState('');//(Tree title-)
