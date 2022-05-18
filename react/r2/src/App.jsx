@@ -20,9 +20,9 @@ function App() {
 
   const [modalData, setModalData] = useState(null);
 
-  const [lastUpdate, setLastUpdate] = useState(Date.now()); //cia bus data kada pirma uzsikrauna puslapis
+  const [lastUpdate, setLastUpdate] = useState(Date.now()); //7.cia bus data kada pirma uzsikrauna puslapis
 
-
+  // Read     // Read  // Read  // Read  // Read  // Read  // Read  // Read  // Read  // Read
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
       .then(res => {
@@ -31,6 +31,7 @@ function App() {
       })
   }, [lastUpdate]);
 
+    //Create
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   //3)useEffect pas mus vyks kai pasikeis creatoData
   useEffect(() => {
@@ -43,7 +44,7 @@ function App() {
       setLastUpdate(Date.now()) });
   },[createData])
 
-  //
+  //Edit
   useEffect(() => {
     if (null === editData) {
       return;
@@ -57,17 +58,18 @@ function App() {
   },[editData]);
 
 
+  //Delete
   useEffect(() => {
-    if (null === editData) {
+    if (null === deleteId) {
       return;
     }
-    axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData)
+    axios.delete('http://localhost:3003/trees-manager/' + deleteId.id, )
     .then(res => {
       console.log(res);
       setLastUpdate(Date.now());
     });
 
-  },[editData]);
+  },[deleteId])
 
 
   return (
