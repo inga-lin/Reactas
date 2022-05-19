@@ -7,7 +7,10 @@ function App() {
     return (
         <BrowserRouter>
         <Routes>
-        <Route index element={<Front go="von"/>} />
+        <Route index element={<Front show="all"/>} />
+        <Route path="leaf" element={<Front show="leaf"/>} />
+        <Route path="spike" element={<Front show="spike"/>} />
+        <Route path="palm" element={<Front show="palm"/>} />
         <Route path="admin" element={<Back/>}></Route>
         </Routes>
         </BrowserRouter>

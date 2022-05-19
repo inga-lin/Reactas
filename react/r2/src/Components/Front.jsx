@@ -4,20 +4,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../bootstrap.css';
 
-function Front({go}) {
+function Front({show}) {
 
     const [trees, setTrees] = useState([]);
 
-    console.log(go);
+
 
     // Read
     useEffect(() => {
-        axios.get('http://localhost:3003/trees-manager')
+        axios.get('http://localhost:3003/trees-list/'+show)
             .then(res => {
                 console.log(res.data);
                 setTrees(res.data);
             })
-    }, []);
+    }, [show]);
 
     return (
         <>
@@ -32,9 +32,9 @@ function Front({go}) {
                             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
                                     <Link className="nav-link" to="/">Home</Link>
-                                    <Link className="nav-link" to="leaf">Leaf</Link>
-                                    <Link className="nav-link" to="spike">Spike</Link>
-                                    <Link className="nav-link" to="palm">Palm</Link>
+                                    <Link className="nav-link" to="/leaf">Leaf</Link>
+                                    <Link className="nav-link" to="/spike">Spike</Link>
+                                    <Link className="nav-link" to="/palm">Palm</Link>
                                 </div>
                             </div>
                         </nav>
@@ -43,7 +43,7 @@ function Front({go}) {
             </div>
             <div className="container mt-4">
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-12"> 
                         <ul className="list-group">
                             {
                                 trees.map(t => <TreeLine key={t.id} tree={t}></TreeLine>)
