@@ -4,7 +4,9 @@ function TreeLine({ tree, setDeleteId, setModalData }) {
         <li className="list-group-item">
             <div className="tree-line">
                 <div className="tree-line__content">
-                    {tree.name}
+                <span>{tree.name}</span>
+                    <span>{tree.height} m</span>
+                    <span>{['Leaf','Spike','Palm'][tree.type - 1]}</span>
 
                 </div>
                 <div className="tree-line__buttons">
