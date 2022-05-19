@@ -68,15 +68,15 @@ app.post('/trees-manager', (req, res) => {
 
 });
 
-// Trina medzius
+//8. Trina medzius
 // DELETE FROM table_name
 // WHERE some_column = some_value
-app.delete('/trees-manager/:id', (req, res) => {
+app.delete('/trees-manager/:id', (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
     const sql = `
         DELETE FROM trees
         WHERE id = ?
         `;
-    con.query(sql, [req.params.id], (err, result) => {
+    con.query(sql, [req.params.id], (err, result) => { //[req.params.id] yra = '/trees-manager/:id'
         if (err) {
             throw err;
         }
@@ -84,7 +84,7 @@ app.delete('/trees-manager/:id', (req, res) => {
     })
 })
 
-// Redaguoja gyvuna
+// 9.Redaguoja medzius
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
 // WHERE condition;

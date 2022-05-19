@@ -17,26 +17,26 @@ function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is 
             height,
             type
         });
-        setTitle('');
-        setHeight('');
-        setType(1)
+        setTitle(''); //7. kai visa info issiunciam padarom kad lentele vel butu tuscia
+        setHeight('');//7. kai visa info issiunciam padarom kad lentele vel butu tuscia
+        setType(1);//7. kai visa info issiunciam padarom kad lentele vel butu ant pirmo pasirinkimo
 
     }//4)ir ji perduodam i buttona onClick={buttonHandler} ir einam i server-App.js
 
     //2)apsirasom funkcija kuri gauna event(is pildomos lenteles(Add New Tree)) ir which-kuri norim kad jis kontruoliuotu
-    //per cia galesim rasyti i lentele
+    //2per cia galesim rasyti i lentele
     const inputHandler = (e, which) => {
         switch(which) {
-            case 'title': //jeigu jis yra title tai tada setinam tai ka gaunam is setTitle(e.target.value);
+            case 'title': //2jeigu jis yra title tai tada setinam tai ka gaunam is setTitle(e.target.value);
             setTitle(e.target.value);
             break;
-            case 'height': //jeigu jis yra 'height' tai tada setinam tai ka gaunam is setHeight(e.target.value.replace(/,/g, '.')-sitas padaro kad kablelius pavestu i taska);
+            case 'height': //2jeigu jis yra 'height' tai tada setinam tai ka gaunam is setHeight(e.target.value.replace(/,/g, '.')-sitas padaro kad kablelius pavestu i taska);
             setHeight(e.target.value.replace(/,/g, '.'));
             break;
-            case 'type': //jeigu jis yra 'type' tai tada setinam tai ka gaunam is setType(e.target.value);;
+            case 'type': //2jeigu jis yra 'type' tai tada setinam tai ka gaunam is setType(e.target.value);;
             setType(e.target.value);
             break;
-            default: //ir juos sukisam irgi i imputus(onChange={e => inputHandler(e, 'title')},onChange={e => inputHandler(e, 'height')}, onChange={e => inputHandler(e, 'type')})
+            default: //2ir juos sukisam irgi i imputus(onChange={e => inputHandler(e, 'title')},onChange={e => inputHandler(e, 'height')}, onChange={e => inputHandler(e, 'type')})
         }
     }
 

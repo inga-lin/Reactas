@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 function Modal({setModalData, modalData, setEditData}) {
-
+//9. is Create.jsx nusikopinam dali kodo
+//Edit tree
     const [title, setTitle] = useState('');
     const [height, setHeight] = useState('');
     const [type, setType] = useState('1');
@@ -53,7 +54,7 @@ function Modal({setModalData, modalData, setEditData}) {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Edit tree</h5>
                         <button type="button" className="close" onClick={() => setModalData(null)}>
                             <span aria-hidden="true">&times;</span>
                         </button>

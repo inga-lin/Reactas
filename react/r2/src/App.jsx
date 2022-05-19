@@ -11,25 +11,25 @@ import Modal from './Components/Modal';
 
 function App() {
 
-  const [trees, setTrees] = useState([]);
+  const [trees, setTrees] = useState([]);//--
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
-  const [createData, setCreateData] = useState(null);
-  const [editData, setEditData] = useState(null);
+  const [createData, setCreateData] = useState(null);//---
+  const [editData, setEditData] = useState(null);//
 
-  const [deleteId, setDeleteId] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);//8trinimo buttonas
 
-  const [modalData, setModalData] = useState(null);
+  const [modalData, setModalData] = useState(null);//9. setModalDataperduodam i komponenta Modal ir TreeLine
 
-  const [lastUpdate, setLastUpdate] = useState(Date.now()); //7.cia bus data kada pirma uzsikrauna puslapis
+  const [lastUpdate, setLastUpdate] = useState(Date.now()); //7.cia bus data kada pirma karta reactas uzsikrauna puslapi
 
-  // Read     // Read  // Read  // Read  // Read  // Read  // Read  // Read  // Read  // Read
+  // Read 
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
       .then(res => {
         console.log(res.data);
         setTrees(res.data);//padarom kad per cia pasiimam savo trees is serverio
       })
-  }, [lastUpdate]);
+  }, [lastUpdate]); //7.
 
     //Create
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
@@ -38,13 +38,13 @@ function App() {
     if (null === createData) { //3)jeigu createData yra === null nieko nedarom ir einam lauk is cia
       return;
     }
-    axios.post('http://localhost:3003/trees-manager', createData)//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData
+    axios.post('http://localhost:3003/trees-manager', createData)//3)kai jis  jau tures kazka naujo tai ta nauja info dedam i 'http://localhost:3003/trees-manager', createData //post-isiusti
     .then(res => {
       console.log(res);  //3)console.log(res) pasiziurim ka mums servas atsakys
-      setLastUpdate(Date.now()) });
+      setLastUpdate(Date.now()) }); //7paskutinis pakeitimas turi buti dabartine Data
   },[createData])
 
-  //Edit
+  //7Edit 
   useEffect(() => {
     if (null === editData) {
       return;
@@ -52,21 +52,21 @@ function App() {
     axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData)
     .then(res => {
       console.log(res);
-      setLastUpdate(Date.now());
+      setLastUpdate(Date.now());//7paskutinis pakeitimas turi buti dabartine Data
     });
 
   },[editData]);
 
 
-  //Delete
+  //8 Delete buttonas ir tai dar apsirasyti app.js serverio puseje
   useEffect(() => {
     if (null === deleteId) {
       return;
     }
-    axios.delete('http://localhost:3003/trees-manager/' + deleteId.id, )
+    axios.delete('http://localhost:3003/trees-manager/' + deleteId.id, ) //cia nepamirsti prie http galo prirasyti / ir prideti deleteId objekta su savybe id(jis istrins visa eilutes info) //delete-istrinti
     .then(res => {
       console.log(res);
-      setLastUpdate(Date.now());
+      setLastUpdate(Date.now());//7paskutinis pakeitimas turi buti dabartine Data
     });
 
   },[deleteId])
