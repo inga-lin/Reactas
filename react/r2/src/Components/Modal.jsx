@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 function Modal({setModalData, modalData, setEditData}) {
+//modalData visas medis ant modalo
 //9. is Create.jsx nusikopinam dali kodo
 //Edit tree
     const [title, setTitle] = useState('');
     const [height, setHeight] = useState('');
     const [type, setType] = useState('1');
-    const [id, setId] = useState('0');
+    const [id, setId] = useState('0');//11 pradinis bus 0
 
     const buttonHandler = () => {
-        setEditData({
+        setEditData({ //10 cia turi tu
             title,
             height,
             type,
-            id
+            id//11
         });
         setModalData(null);
     }
@@ -33,19 +34,19 @@ function Modal({setModalData, modalData, setEditData}) {
     }
 
     useEffect(() => {
-        if (modalData === null) {
+        if (modalData === null) { //9jeigu modalData === null modale nebus duomenu ir uzsidarys modalas
             setTitle('');
             setHeight('');
             setType(1);
-        } else {
+        } else { // 9priesingu atveju pas mus modalas atsidarineje ir matysis duomenys is anksciau suvestu
             setTitle(modalData.name);
             setHeight(modalData.height);
             setType(modalData.type);
-            setId(modalData.id);
+            setId(modalData.id);//11
         }
     }, [modalData])
 
-    if (modalData === null) {
+    if (modalData === null) { //9.jeigu modalData === null modalo nebus // jeigu modal data yra objektas turesim ka parodyti
         return null;
     }
 
@@ -55,7 +56,7 @@ function Modal({setModalData, modalData, setEditData}) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">Edit tree</h5>
-                        <button type="button" className="close" onClick={() => setModalData(null)}>
+                        <button type="button" className="close" onClick={() => setModalData(null)}>{/*paspaudus x per setModalData(null) bus uzdaroma modallentele */}
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -93,7 +94,7 @@ function Modal({setModalData, modalData, setEditData}) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Save</button>
-                        <button type="button" className="btn btn-outline-danger m-3"  onClick={() => setModalData(null)}>Cancel</button>
+                        <button type="button" className="btn btn-outline-danger m-3"  onClick={() => setModalData(null)}>Cancel</button>{/*paspaudus Cancel per setModalData(null) bus uzdaroma modal lentele */}
                     </div>
                 </div>
             </div>

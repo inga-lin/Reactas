@@ -13,8 +13,8 @@ function App() {
 
   const [trees, setTrees] = useState([]);//--
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
-  const [createData, setCreateData] = useState(null);//---
-  const [editData, setEditData] = useState(null);//
+  const [createData, setCreateData] = useState(null);//3 
+  const [editData, setEditData] = useState(null);//10. ir ji perduosim per Modal ir ten pasiimsim
 
   const [deleteId, setDeleteId] = useState(null);//8trinimo buttonas
 
@@ -95,7 +95,7 @@ function App() {
         </div>
       </div>
     </div>
-      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>
+      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
     </>
   );
 }
