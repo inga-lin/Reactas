@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../bootstrap.css';
+import '../front.scss';
 
 function Front({show}) {
 
@@ -49,6 +50,22 @@ function Front({show}) {
                                 trees.map(t => <TreeLine key={t.id} tree={t}></TreeLine>)
                             }
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <div className="container mt-4">
+                <div className="row">
+                    <div className="col-12"> 
+                        <svg>
+                          <use xlinkHref="#arrow">
+                              
+                          </use>
+                          </svg>
+                          <svg>
+                          <use xlinkHref="#arrow">
+                              
+                          </use>
+                          </svg>
                     </div>
                 </div>
             </div>
