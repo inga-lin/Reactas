@@ -31,7 +31,7 @@ function App() {
       })
   }, [lastUpdate]); //7.
 
-    //Create
+  //Create
   //3)funkcija kuri is createData komponento paims informacija kuria reikia issiusti ir irasys serveri
   //3)useEffect pas mus vyks kai pasikeis creatoData
   useEffect(() => {
@@ -44,12 +44,12 @@ function App() {
       setLastUpdate(Date.now()) }); //7paskutinis pakeitimas turi buti dabartine Data
   },[createData])
 
-  //7Edit 
+  //10Edit 
   useEffect(() => {
     if (null === editData) {
       return;
     }
-    axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData)
+    axios.put('http://localhost:3003/trees-manager/'+ editData.id, editData) //
     .then(res => {
       console.log(res);
       setLastUpdate(Date.now());//7paskutinis pakeitimas turi buti dabartine Data

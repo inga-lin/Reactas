@@ -15,7 +15,7 @@ function Modal({setModalData, modalData, setEditData}) {
             type,
             id//11
         });
-        setModalData(null);
+        setModalData(null);//11kai uzpildom modalo lentele ji turi nusinulint(issitrinti duomenys)
     }
 
     const inputHandler = (e, which) => {
@@ -93,7 +93,7 @@ function Modal({setModalData, modalData, setEditData}) {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Save</button>
+                        <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Save</button>{/*11. nusinulina duomenys is modalo ir uzsidaro lenteles paspaudus save*/}
                         <button type="button" className="btn btn-outline-danger m-3"  onClick={() => setModalData(null)}>Cancel</button>{/*paspaudus Cancel per setModalData(null) bus uzdaroma modal lentele */}
                     </div>
                 </div>
