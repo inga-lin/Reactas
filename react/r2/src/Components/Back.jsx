@@ -401,5 +401,32 @@ susikuriam dar componentuose Front folderi ir jame FreeLine.jsx
 kuris ieis i Front.app vidu ir ten viska susirasom ko reik
 navbara ir kokia info norim kad atvaizduotu
 
+(//b pasirasius useEfecta reik eiti server/app.js ir ten ji apsirasyti
+app.get("/trees-list/all", (req, res) => {
+        const sql = `
+        SELECT
+        *
+        FROM trees
+    `;
+        con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
 
+})
+
+app.get("/trees-list/:cat", (req, res) => {
+    if (req.params.cat != "all") {
+    const sql = `
+            SELECT
+            *
+            FROM trees
+            WHERE type = ?
+        `;
+    con.query(sql, [['leaf','spike','palm'].indexOf(req.params.cat) + 1], (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  }
+});)
 */

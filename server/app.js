@@ -1,4 +1,5 @@
-const express = require("express");
+
+/*const express = require("express");
 const app = express();
 const port = 3003;
 const cors = require("cors");
@@ -39,7 +40,7 @@ app.get("/trees-manager", (req, res) => {
     res.json(result);
   });
 });
-    app.get("/trees-list/all", (req, res) => {
+app.get("/trees-list/all", (req, res) => {
         const sql = `
         SELECT
         *
@@ -128,7 +129,11 @@ app.put("/trees-manager/:id", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-/*const express = require('express');
+*/
+
+
+
+const express = require('express');
 const app = express();
 const port = 3003;
 const cors = require('cors');
@@ -174,15 +179,30 @@ app.get('/trees-manager', (req, res) => {
 });
 
 ///////////////////////////////////
+//b.apsirasom Fronts.jsx useEffect
+//b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
+app.get("/trees-list/all", (req, res) => {
+        const sql = `
+        SELECT
+        *
+        FROM trees
+    `;
+        con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+
+})
+
 app.get("/trees-list/:cat", (req, res) => {
     if (req.params.cat != "all") {
     const sql = `
             SELECT
             *
-            FROM medziai
+            FROM trees
             WHERE type = ?
         `;
-    con.query(sql, [['leaf','spike','palm'].indexOf(req.params.cat) + 1], (err, result) => {
+    con.query(sql, [['leaf','spike','palm'].indexOf(req.params.cat) + 1], (err, result) => { //b.mes gaunam zodzius ir juos paverciam i indeksa
       if (err) throw err;
       res.send(result);
     });
@@ -263,4 +283,3 @@ app.put('/trees-manager/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-*/

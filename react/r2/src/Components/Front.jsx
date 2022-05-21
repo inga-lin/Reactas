@@ -13,12 +13,12 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
 
     // Read
     useEffect(() => {
-        axios.get('http://localhost:3003/trees-list/' + show)
+        axios.get('http://localhost:3003/trees-list/' + show) //bcia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
             .then(res => {
                 console.log(res.data);
                 setTrees(res.data);
             })
-    }, [show]);
+    }, [show]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
     return (
         <>
