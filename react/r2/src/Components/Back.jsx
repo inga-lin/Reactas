@@ -149,7 +149,8 @@ export default function DogsTrikam({dogs}) {
 //dogs.map((dogs, i) => dogs.length > 6 ? (<h1 key={i} style={{color:'green'}}>{dogs.length}</h1>):(<h1 key={i} style={{color:'red'}}>{dogs.length}</h1>))
 
 */
-/*xamp start-> start-> Admin
+/* kaip pasileisti projekta
+xamp start-> start-> Admin
 http://localhost/phpmyadmin/
 phpMyAdmin
 New -> irasom pavadinima i pirma laukeli gtarkim(turi buti pavadinime mazosios raides):
@@ -324,4 +325,7 @@ nueinam i recta/r2
 npm i sass   (cia galim rasyti kaip css failiuke, gal :D )
 npm start
 turetu uzsikraut be klaidu
+---------------------------------------
+2022.05.19
+
 */
