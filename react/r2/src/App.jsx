@@ -7,10 +7,10 @@ function App() {
     return (
         <BrowserRouter>
         <Routes>
-        <Route index element={<Front show="all"/>} />
-        <Route path="leaf" element={<Front show="leaf"/>} />
-        <Route path="spike" element={<Front show="spike"/>} />
-        <Route path="palm" element={<Front show="palm"/>} />
+        <Route index element={<Front show="all"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
+        <Route path="leaf" element={<Front show="leaf"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
+        <Route path="spike" element={<Front show="spike"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
+        <Route path="palm" element={<Front show="palm"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
         <Route path="admin" element={<Back/>}></Route>
         </Routes>
         </BrowserRouter>

@@ -1,11 +1,11 @@
 import TreeLine from "./Front/TreeLine";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //a.butinas linkams darant. is cia https://reactrouter.com/docs/en/v6/getting-started/overview
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../bootstrap.css';
 import '../front.scss';
 
-function Front({ show }) {
+function Front({ show }) { //b. pasiemam propsa is App.jsx
 
     const [trees, setTrees] = useState([]);
 
@@ -32,10 +32,10 @@ function Front({ show }) {
                             </button>
                             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
-                                    <Link className="nav-link" to="/">Home</Link>
-                                    <Link className="nav-link" to="/leaf">Leaf</Link>
-                                    <Link className="nav-link" to="/spike">Spike</Link>
-                                    <Link className="nav-link" to="/palm">Palm</Link>
+                                    <Link className="nav-link" to="/">Home</Link>  {/*//a.butinas linkams*/}
+                                    <Link className="nav-link" to="/leaf">Leaf</Link>{/*//a.butinas linkams /leaf nurodo kaip i ji patekti i http://localhost:3000/leaf*/}
+                                    <Link className="nav-link" to="/spike">Spike</Link>{/*//a.butinas linkams*/}
+                                    <Link className="nav-link" to="/palm">Palm</Link>{/*//a.butinas linkams*/}
                                 </div>
                             </div>
                         </nav>
@@ -58,10 +58,10 @@ function Front({ show }) {
                     <div className="col-12">
                         <div className="arrows">
                         <svg className="up">
-                            <use xlinkHref="#arrow"></use>
+                            <use xlinkHref="#arrow"></use> {/*cia bus rodykles*/}
                         </svg>
                         <svg className="down">
-                            <use xlinkHref="#arrow"></use>
+                            <use xlinkHref="#arrow"></use> {/*cia bus rodykles*/}
                         </svg>
                         </div>
                     </div>

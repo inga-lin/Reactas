@@ -327,5 +327,79 @@ npm start
 turetu uzsikraut be klaidu
 ---------------------------------------
 2022.05.19
+savo App.jsx failiuka permetem i Componentus ir pervadinom Back.jsx (ir ten jo viduje pasikeiciam funkcijos pavadinima)
+ir kelius issitaisom import { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../bootstrap.css';
+import '../back.scss';           //ir app.scss pervadinam i back.scss o tam naujam App.jsx sukursim app.scss
+import Create from './Create';
+import TreeLine from './TreeLine';
+import Modal from './Modal';
+
+o src susikurem nauja App.jsx su:
+import Back from "./Components/Back";
+//import { BrowserRouter, Routes, Route, } from "react-router-dom";
+//import Front from "./Components/Front";
+
+function App() {
+
+    return (
+        //<BrowserRouter>
+        //<Routes>
+       // <Route index element={<Front show="all"/>} />
+       // <Route path="leaf" element={<Front show="leaf"/>} />
+       // <Route path="spike" element={<Front show="spike"/>} />
+       // <Route path="palm" element={<Front show="palm"/>} />
+        //<Route path="admin" element={<Back/>}></Route>
+       // </Routes>
+       // </BrowserRouter>
+       <Back></Back>
+    )
+}
+export default App;
+pasitikrinam ar veikia http://localhost:3000/
+
+einam i 
+https://reactrouter.com/
+read the Docs
+arba cia iskart https://reactrouter.com/docs/en/v6/getting-started/overview
+terminale kur fronto dalis instaliuojam :
+control c     tada y  (butinai nukilinam nes kitaip neveiks- arba per pliusiuka nauja atsidaryti ir ten pasileisti)
+npm install react-router-dom@6
+npm start
+
+componentuose susikuriam faila Front.jsx it ten parasom labas
+
+
+tada savo App.jsx susikelaim visa info back ir front (viskas turi taip ir vadintis)
+import Back from "./Components/Back";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import Front from "./Components/Front";
+
+function App() {
+
+    return (
+        <BrowserRouter>
+        <Routes>
+        <Route index element={<Front show="all"/>} />           //http://localhost:3000/ cia atvaizduos viska ka sukurem back.jsx
+        <Route path="leaf" element={<Front show="leaf"/>} />    //http://localhost:3000/leaf  cia jei reiks galima isrusiuotai atvaizduoti tik leaf naujame puslapyje
+        <Route path="spike" element={<Front show="spike"/>} />  //http://localhost:3000/spike  cia jei reiks galima isrusiuotai atvaizduoti tik spike naujame puslapyje
+        <Route path="palm" element={<Front show="palm"/>} />    //http://localhost:3000/palm   cia jei reiks galima isrusiuotai atvaizduoti tik palm naujame puslapyje
+        <Route path="admin" element={<Back/>}></Route>
+        </Routes>
+        </BrowserRouter>
+    )
+}
+export default App;
+
+pasiziurim ar veikia:
+dabar musu back dalis bus http://localhost:3000/admin
+o http://localhost:3000/ cia bus ka klientai matys dabar labas
+
+einam daryti Front.app
+susikuriam dar componentuose Front folderi ir jame FreeLine.jsx
+kuris ieis i Front.app vidu ir ten viska susirasom ko reik
+navbara ir kokia info norim kad atvaizduotu
+
 
 */

@@ -6,7 +6,7 @@ return (
             <div className="tree-line__content">
                 <span>{tree.name}</span>
                 <span>{tree.height} m</span>
-                <span>{['Leaf','Spike','Palm'][tree.type - 1]}</span>{/*kadangi skaicia pas mus eina nuo 1 tai reik atimt 1 nes istikro reik skaiciuot nuo 0 indekso*/}
+                <span>{['Leaf','Spike','Palm'][tree.type - 1]}</span>{/*is masyvo ['Leaf','Spike','Palm'] paimam viena konkretu elementa [tree.type - 1]*/}
             </div>
             <div className="tree-line__buttons">
             <button type="button" className="btn btn-outline-primary m-1" onClick={()=>setModalData(tree)}>Edit</button>
