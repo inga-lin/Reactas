@@ -181,7 +181,7 @@ app.get('/trees-manager', (req, res) => {
 ///////////////////////////////////
 //b.apsirasom Fronts.jsx useEffect
 //b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
-app.get("/trees-list/all", (req, res) => {
+app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
         *
@@ -194,7 +194,7 @@ app.get("/trees-list/all", (req, res) => {
 
 })
 
-app.get("/trees-list/:cat", (req, res) => {
+app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta all iesko 'leaf','spike','palm' ir kazkuri is ju atidaro
     if (req.params.cat != "all") {
     const sql = `
             SELECT
