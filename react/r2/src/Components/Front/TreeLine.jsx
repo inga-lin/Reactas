@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TreeLine({ tree, saveVote }) {
+function TreeLine({ tree, saveVote, com }) {
 
     const [vote, setVote] = useState(5);
 
@@ -18,7 +18,9 @@ function TreeLine({ tree, saveVote }) {
                     <b>{(tree.sum / tree.count || 1).toFixed(2)}</b>
                     <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e=>setVote(e.target.value)}></input>
                     <button type="button" className="btn btn-outline-primary ml-2" onClick={clickVote}>Vote</button>
-
+                    {
+                        com.filter(o => o.id === tree.id).map(c => <div key={c.cid}>{c.com}</div>)
+                    }
                 </div>
             </div>
         </li>

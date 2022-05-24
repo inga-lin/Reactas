@@ -184,15 +184,33 @@ app.get('/trees-manager', (req, res) => {
 app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
-        *
-        FROM trees
+        m.id AS id, m.name, m.height, m.type, m.count, m.sum, k.con, k.id AS cid
+        FROM trees AS m
+        LEFT JOIN komentarai AS k
+        ON m.id = k.medziai_id
+        
     `;
         con.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 
-})
+}) ////404 cia dadejom/////////////////////////////////////////////////////
+
+//BUVO virsuje taip
+//app.get("/trees-list/all", (req, res) => {
+//  const sql = `
+//      SELECT
+//        *
+//        FROM medziai
+//    `;
+//  con.query(sql, (err, result) => {
+//    if (err) throw err;
+//    res.send(result);
+//  });
+//});
+
+
 
 app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta all iesko 'leaf','spike','palm' ir kazkuri is ju atidaro
     if (req.params.cat != "all") {
@@ -348,6 +366,13 @@ app.put("/trees-vote/:id", (req, res) => {
     }
   );
 });
+
+
+//404 lenteliu apjungimas
+//SELECT column_name(s)
+//FROM table1
+//LEFT JOIN table2
+//ON table1.column_name = table2.column_name;
 
 
 app.listen(port, () => {
