@@ -13,6 +13,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     const [trees, dispachTrees] = useReducer(reducer, []);//101kliento puseje. perduodam per Action/index.js, Constans/index.js, Reducer/reducer.js.js,
 
     const [search, setSearch] = useState('');//103 search
+    const [lastUpdate, setLastUpdate] = useState(Date.now()); 
     // Read
     useEffect(() => {
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
@@ -20,7 +21,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                 console.log(res.data);
                 dispachTrees(getDataFromServer(res.data));
             })
-    }, [show]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
+    }, [show, lastUpdate]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
     //102 serverio puseje rusiavimas
     const serverSort = ( by, dir) => {
@@ -37,6 +38,13 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         .then(res => {
             dispachTrees(getDataFromServer(res.data));
         });
+    }
+
+    const saveVote = (id, value) => {
+        axios.put('http://localhost:3003/trees-vote/' + id + '/', {vote: value}) //arba be + '/'
+        .then(res => {
+            setLastUpdate(Date.now())
+        })
     }
 
     return (
@@ -66,7 +74,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-12">
                         <ul className="list-group">
                             {
-                                trees.map(t => <TreeLine key={t.id} tree={t}></TreeLine>)
+                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote}></TreeLine>)
                             }
                         </ul>
                     </div>
