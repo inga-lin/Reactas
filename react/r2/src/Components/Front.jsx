@@ -48,8 +48,8 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
 
     //103 search
     const doSearch = e => {
-        setSearch(e.target.value);
-        axios.get('http://localhost:3003/trees-list-search/?s='+ e.target.value)
+        setSearch(e.target.value); //cia yra reiksme kurios ieskosim (e.target.value)
+        axios.get('http://localhost:3003/trees-list-search/?s='+ e.target.value) //ieskom e.target.value
         .then(res => {
             dispachTrees(getDataFromServer(res.data));//getDataFromServer pasiimam is Action/index.js
         });
@@ -60,7 +60,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         axios.put('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'
         .then(res => {
             setLastUpdate(Date.now())
-        })
+        });
     }
 
     return (
@@ -123,10 +123,10 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-2">{/*101 rusiuojam su serveriu*/}
                     <span>By name <small>server</small>:</span>
                         <div className="arrows">
-                        <svg className="up" onClick={() => serverSort('title', 'asc')}>
+                        <svg className="up" onClick={() => serverSort('title', 'asc')}> {/*serveryje name*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                        <svg className="down"  onClick={() => serverSort('title', 'desc')}>
+                        <svg className="down"  onClick={() => serverSort('title', 'desc')}>{/*serveryje name*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
                         </div>
@@ -144,7 +144,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     </div>
                     <div className="col-2">
                     <div className="form-group">
-                        <label>search</label>
+                        <label>search</label>{/*103*/}
                         <input type="text" className="form-control" onChange={doSearch} value={search} />
                         <small className="form-text text-muted">Add new tree name here.</small>
                     </div>

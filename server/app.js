@@ -326,7 +326,7 @@ app.get("/trees-list-sorted/", (req, res) => {
 });
 //trees
 
-//103 search
+//103 search paiska pagal pavadinima name
 // SELECT column1, column2, ...
 // FROM table_name
 // WHERE columnN LIKE pattern;
