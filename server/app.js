@@ -278,6 +278,53 @@ app.put('/trees-manager/:id', (req, res) => {
 
 
 
+//102 sortinam name ir height
+// SELECT column1, column2, ...
+// FROM table_name
+// ORDER BY column1, column2, ... ASC|DESC;
+app.get("/trees-list-sorted/", (req, res) => {
+  
+  let sql;
+
+  if (req.query.by == 'title' && req.query.dir == 'asc'){
+    sql = `SELECT * FROM trees ORDER BY name ASC`;
+  }
+  else if (req.query.by == 'title' && req.query.dir == 'desc'){
+    sql = `SELECT * FROM trees ORDER BY name DESC`;
+  }
+  else if (req.query.by == 'height' && req.query.dir == 'asc'){
+    sql = `SELECT * FROM trees ORDER BY height ASC`;
+  }
+  else{
+    sql = `SELECT * FROM trees ORDER BY height DESC`;
+  }
+    con.query(
+      sql,
+      (err, results) => {
+        if (err) throw err;
+        res.send(results);
+      }
+    );
+});
+
+
+//103 search
+// SELECT column1, column2, ...
+// FROM table_name
+// WHERE columnN LIKE pattern;
+
+app.get("/trees-list-search", (req, res) => {
+  const sql = `
+        SELECT
+        *
+        FROM trees
+        WHERE name LIKE '%${req.query.s}%'
+    `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 
 app.listen(port, () => {

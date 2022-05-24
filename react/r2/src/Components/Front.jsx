@@ -10,9 +10,9 @@ import { getDataFromServer, sortClientHeightAsc, sortClientHeightDesc, sortClien
 function Front({ show }) { //b. pasiemam propsa is App.jsx
 
     //const [trees, setTrees] = useState([]);
-    const [trees, dispachTrees] = useReducer(reducer, []);
+    const [trees, dispachTrees] = useReducer(reducer, []);//101kliento puseje. perduodam per Action/index.js, Constans/index.js, Reducer/reducer.js.js,
 
-
+    const [search, setSearch] = useState('');//103 search
     // Read
     useEffect(() => {
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
@@ -22,8 +22,21 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
             })
     }, [show]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
-    const serverSort = (dir, by) => {
+    //102 serverio puseje rusiavimas
+    const serverSort = ( by, dir) => {
         axios.get('http://localhost:3003/trees-list-sorted/?dir=' + dir + '&by=' + by)
+        .then(res => {
+            dispachTrees(getDataFromServer(res.data));
+        });
+    }
+
+    //103 search
+    const doSearch = e => {
+        setSearch(e.target.value);
+        axios.get('http://localhost:3003/trees-list-search/?s='+ e.target.value)
+        .then(res => {
+            dispachTrees(getDataFromServer(res.data));
+        });
     }
 
     return (
@@ -82,6 +95,35 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                             <use xlinkHref="#arrow"></use>
                         </svg>
                         </div>
+                    </div>
+                    <div className="col-2">
+                        <span>By name <small>server</small>:</span>
+                        <div className="arrows">
+                        <svg className="up" onClick={() => serverSort('name', 'asc')}>
+                            <use xlinkHref="#arrow"></use>
+                        </svg>
+                        <svg className="down"  onClick={() => serverSort('name', 'desc')}>
+                            <use xlinkHref="#arrow"></use>
+                        </svg>
+                        </div>
+                    </div>
+                    <div className="col-2">
+                        <span>By height <small>server</small>:</span>
+                        <div className="arrows">
+                        <svg className="up"  onClick={() => serverSort('height', 'asc')}>
+                            <use xlinkHref="#arrow"></use>
+                        </svg>
+                        <svg className="down"  onClick={() => serverSort('height', 'desc')}>
+                            <use xlinkHref="#arrow"></use>
+                        </svg>
+                        </div>
+                    </div>
+                    <div className="col-2">
+                    <div className="form-group">
+                        <label>search</label>
+                        <input type="text" className="form-control" onChange={doSearch} value={search} />
+                        <small className="form-text text-muted">Add new tree name here.</small>
+                    </div>
                     </div>
                 </div>
             </div>
