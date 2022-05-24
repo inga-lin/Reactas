@@ -39,7 +39,8 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
             dispachTrees(getDataFromServer(res.data));
         });
     }
-
+    
+    //300
     const saveVote = (id, value) => {
         axios.put('http://localhost:3003/trees-vote/' + id + '/', {vote: value}) //arba be + '/'
         .then(res => {
