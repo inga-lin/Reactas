@@ -42,7 +42,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     const serverSort = (by, dir) => {
         axios.get('http://localhost:3003/trees-list-sorted/?dir='+ dir + '&by=' + by)
         .then(res => {
-            dispachTrees(getDataFromServer(res.data));
+            dispachTrees(getDataFromServer(res.data));//getDataFromServer pasiimam is Action/index.js
         });
     }
 
@@ -51,7 +51,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         setSearch(e.target.value);
         axios.get('http://localhost:3003/trees-list-search/?s='+ e.target.value)
         .then(res => {
-            dispachTrees(getDataFromServer(res.data));
+            dispachTrees(getDataFromServer(res.data));//getDataFromServer pasiimam is Action/index.js
         });
     }
     
@@ -121,18 +121,18 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                         </div>
                     </div>
                     <div className="col-2">{/*101 rusiuojam su serveriu*/}
-                        <span>By name <small>server</small>:</span>
+                    <span>By name <small>server</small>:</span>
                         <div className="arrows">
-                        <svg className="up" onClick={() => serverSort('name', 'asc')}>
+                        <svg className="up" onClick={() => serverSort('title', 'asc')}>
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                        <svg className="down"  onClick={() => serverSort('name', 'desc')}>
+                        <svg className="down"  onClick={() => serverSort('title', 'desc')}>
                             <use xlinkHref="#arrow"></use>
                         </svg>
                         </div>
                     </div>
                     <div className="col-2">{/*101 rusiuojam su serveriu*/}
-                        <span>By height <small>server</small>:</span>
+                    <span>By height <small>server</small>:</span>
                         <div className="arrows">
                         <svg className="up"  onClick={() => serverSort('height', 'asc')}>
                             <use xlinkHref="#arrow"></use>
