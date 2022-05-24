@@ -178,7 +178,7 @@ app.get('/trees-manager', (req, res) => {
 
 });
 
-///////////////////////////////////
+/////////////////////////////////// 404
 //b.apsirasom Fronts.jsx useEffect
 //b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
 app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
@@ -296,7 +296,7 @@ app.put('/trees-manager/:id', (req, res) => {
 
 
 
-//102 sortinam name ir height
+//101 sortinam name ir height
 // SELECT column1, column2, ...
 // FROM table_name
 // ORDER BY column1, column2, ... ASC|DESC;

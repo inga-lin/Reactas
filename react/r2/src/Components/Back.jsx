@@ -430,3 +430,21 @@ app.get("/trees-list/:cat", (req, res) => {
   }
 });)
 */
+
+
+
+
+/*
+2022-05-23
+rusiavimas(mazai galima fronto puseje, jei daug info tai tada serverio puseje)
+// 102
+kliento sortinimas
+susikuriam folderi Constants ir jame faila index.js su visa info
+susikuriam folderi Actiona ir jame faila index.js su visa info
+einam i Front.jsx ir ten apsirasom:
+const [trees, dispachTrees] = useReducer(reducer, []);
+susikuriam folderi Reducers ir jame faila reducer.js su visa info
+
+101serverio sortinimas
+apsirasysim server/app.js ir r2/src/Components/Front.jsx
+*/

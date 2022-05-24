@@ -5,12 +5,12 @@ import axios from 'axios';
 import '../bootstrap.css';
 import '../front.scss';
 import reducer from "../Reducers/reducer";
-import { getDataFromServer, sortClientHeightAsc, sortClientHeightDesc, sortClientNameAsc, sortClientNameDesc } from "../Actions";
+import { getDataFromServer, sortClientHeightAsc, sortClientHeightDesc, sortClientNameAsc, sortClientNameDesc } from "../Actions"; //102 nepamirst susiimportint is Actions
 
 function Front({ show }) { //b. pasiemam propsa is App.jsx
 
-    //const [trees, setTrees] = useState([]);
-    const [trees, dispachTrees] = useReducer(reducer, []);//101kliento puseje. perduodam per Action/index.js, Constans/index.js, Reducer/reducer.js.js,
+    //const [trees, setTrees] = useState([]); //buvo ir pakeiciam i nauje eilute
+    const [trees, dispachTrees] = useReducer(reducer, []);//102kliento puseje. perduodam per Action/index.js, Constans/index.js, Reducer/reducer.js.js,
 
     const [search, setSearch] = useState('');//103 search
     const [lastUpdate, setLastUpdate] = useState(Date.now()); 
@@ -38,7 +38,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         })
 }, [show, lastUpdate]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
-    //102 serverio puseje rusiavimas
+    //101 serverio puseje rusiavimas
     const serverSort = ( by, dir) => {
         axios.get('http://localhost:3003/trees-list-sorted/?dir=' + dir + '&by=' + by)
         .then(res => {
@@ -98,29 +98,29 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
             </div>
             <div className="container mt-4">
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-2"> {/*102 rusiuojam su Reducer*/}
                         <span>By name <small>client</small>:</span>
                         <div className="arrows">
-                        <svg className="up" onClick={() => dispachTrees(sortClientNameAsc())}>
+                        <svg className="up" onClick={() => dispachTrees(sortClientNameAsc())}>{/*102 sortClientNameAsc() jis ateina is Action/index.js*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                        <svg className="down"  onClick={() => dispachTrees(sortClientNameDesc())}>
+                        <svg className="down"  onClick={() => dispachTrees(sortClientNameDesc())}>{/*102 sortClientNameDesc() jis ateina is Action/index.js*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
                         </div>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2">{/*102 rusiuojam su Reducer*/}
                         <span>By height <small>client</small>:</span>
                         <div className="arrows">
-                        <svg className="up"  onClick={() => dispachTrees(sortClientHeightAsc())}>
+                        <svg className="up"  onClick={() => dispachTrees(sortClientHeightAsc())}>{/*102 sortClientHeightAsc() jis ateina is Action/index.js*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
-                        <svg className="down"  onClick={() => dispachTrees(sortClientHeightDesc())}>
+                        <svg className="down"  onClick={() => dispachTrees(sortClientHeightDesc())}>{/*102 sortClientHeightDesc() jis ateina is Action/index.js*/}
                             <use xlinkHref="#arrow"></use>
                         </svg>
                         </div>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2">{/*101 rusiuojam su serveriu*/}
                         <span>By name <small>server</small>:</span>
                         <div className="arrows">
                         <svg className="up" onClick={() => serverSort('name', 'asc')}>
@@ -131,7 +131,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                         </svg>
                         </div>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2">{/*101 rusiuojam su serveriu*/}
                         <span>By height <small>server</small>:</span>
                         <div className="arrows">
                         <svg className="up"  onClick={() => serverSort('height', 'asc')}>
@@ -197,7 +197,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
             .then(res => {
                 console.log(res.data);
-                dispachTrees(getDataFromServer(res.data));
+                dispachTrees(getDataFromServer(res.data)); //102 per cia atiduodam ta reduserio info
             })
     }, [show, lastUpdate]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 

@@ -1,9 +1,9 @@
 import { GET_DATA_FROM_SERVER, SORT_CLIENT_HEIGHT_ASC, SORT_CLIENT_HEIGHT_DESC, SORT_CLIENT_NAME_ASC, SORT_CLIENT_NAME_DESC } from "../Constants";
-
+// cia gaunam duomenis is serverio 102
 export function getDataFromServer(serverData) {
     return {
         type: GET_DATA_FROM_SERVER,
-        payload: serverData
+        payload: serverData //tai ka gausim is serverio. todel cia reik payload o kitiems jo nereiks nes jie tik jau turima info rusiuos
     }
 }
 
