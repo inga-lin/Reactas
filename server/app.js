@@ -316,15 +316,15 @@ app.get("/trees-list-sorted/", (req, res) => {
   else{
     sql = `SELECT * FROM trees ORDER BY height DESC`;
   }
-    con.query(
-      sql,
-      (err, results) => {
-        if (err) throw err;
-        res.send(results);
-      }
-    );
+  con.query(
+    sql,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
 });
-
+//trees
 
 //103 search
 // SELECT column1, column2, ...

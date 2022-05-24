@@ -39,8 +39,8 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
 }, [show, lastUpdate]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
     //101 serverio puseje rusiavimas
-    const serverSort = ( by, dir) => {
-        axios.get('http://localhost:3003/trees-list-sorted/?dir=' + dir + '&by=' + by)
+    const serverSort = (by, dir) => {
+        axios.get('http://localhost:3003/trees-list-sorted/?dir='+ dir + '&by=' + by)
         .then(res => {
             dispachTrees(getDataFromServer(res.data));
         });
