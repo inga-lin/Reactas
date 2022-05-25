@@ -9,11 +9,11 @@ import { getDataFromServer, sortClientHeightAsc, sortClientHeightDesc, sortClien
 
 function Front({ show }) { //b. pasiemam propsa is App.jsx
 
-    //const [trees, setTrees] = useState([]); //buvo ir pakeiciam i nauje eilute
+    //const [trees, setTrees] = useState([]); //buvo pitrmas veiksmas//buvo ir pakeiciam i nauje eilute
     const [trees, dispachTrees] = useReducer(reducer, []);//102kliento puseje. perduodam per Action/index.js, Constans/index.js, Reducer/reducer.js.js,
 
     const [search, setSearch] = useState('');//103 search
-    const [lastUpdate, setLastUpdate] = useState(Date.now()); 
+    const [lastUpdate, setLastUpdate] = useState(Date.now()); //302 nusikopinom is Back.jsx
 
     const [com, setCom] = useState([]); 
     // Read
@@ -36,7 +36,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                 setCom(ar2);
                 dispachTrees(getDataFromServer(ar));
         })
-}, [show, lastUpdate]);//b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
+}, [show, lastUpdate]);//302 lastUpdate //b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
     //101 serverio puseje rusiavimas
     const serverSort = (by, dir) => {
@@ -55,11 +55,11 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         });
     }
     
-    //300
+    //302 {saveVote} ir ji perduodam i Front/TreeLine.jsx per <TreeLine>
     const saveVote = (id, value) => {
-        axios.put('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'
+        axios.put('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'  //http://localhost:3003/trees-vote/' linkas kuri mes issiunciam i serveri kad galetumem votint, atiduodam jam id(ka mes siunciam) ir rezultata{vote: value}
         .then(res => {
-            setLastUpdate(Date.now())
+            setLastUpdate(Date.now()) //cia gaunam rezultata 
         });
     }
 
@@ -90,7 +90,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-12">
                         <ul className="list-group">
                             {
-                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} com={com}></TreeLine>)
+                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} com={com}></TreeLine>) //300 302saveVote
                             }
                         </ul>
                     </div>

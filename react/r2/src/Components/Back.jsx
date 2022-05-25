@@ -447,4 +447,43 @@ susikuriam folderi Reducers ir jame faila reducer.js su visa info
 
 101serverio sortinimas
 apsirasysim server/app.js ir r2/src/Components/Front.jsx
+
+103 search apsirasom server/app.js ir r2/src/Components/Front.jsx
 */
+
+/*
+2022-05-24
+einam i savo http://localhost/phpmyadmin/index.php?route=/sql&server=1&db=sernas&table=trees&pos=0
+(sernas) trees ir ten pridesim prie trees lenteles dar 2stulpelius
+sernas -> trees -> Structure(virsuje)
+Addd 2 <- irasom kiek norim stulpeliu  GO
+
+NAME        TYPE       DEFAULT
+count       INT        Asdefined
+                           0       <-pradine reiksme nulis
+count       INT        Asdefined
+                           0       <-pradine reiksme nulis
+
+SAVE
+
+Pasiziurim Browsw ar atsirado papildomi stulpeliai
+Tada einam i VSC
+einam i Front/TreeLine.jsx nes per cia klientai matys tuos ivertinimus
+apsirasom su 300,301,302
+tada einam i src/Front.jsx ir ten ji apsirasom
+ront/TreeLine.jsx ir ten ji apsirasom
+ir server/app.js apsirasom
+ir turi veikt balsavimas vote
+
+dvieju lenteliu apjungimas ir komentarai
+einam i http://localhost/phpmyadmin/index.php?route=/sql&server=1&db=sernas&table=trees&pos=0
+savo serne spaudziam New -> 
+table name: komentarai
+NAME          TYPE         Length     ATRIBUTES   INDEX     A_I
+id            mediumint                           PRIMARY    x
+                                  
+medziai_id    mediumint               UNSIGNED 
+-------sita medziu_id type ir atributes turi sutapti su trees id kur nurodem type ir atributes !!!--------------
+com            varchar         500
+SAVE
+*/ 

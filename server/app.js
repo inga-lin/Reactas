@@ -133,12 +133,12 @@ app.listen(port, () => {
 
 
 
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = 3003;
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
-const mysql = require('mysql');
+const mysql = require("mysql");
 
 app.use(express.urlencoded({
     extended: true
@@ -330,7 +330,7 @@ app.get("/trees-list-sorted/", (req, res) => {
 // SELECT column1, column2, ...
 // FROM table_name
 // WHERE columnN LIKE pattern;
-
+// ka reiskia '%a' ir t.t. https://www.w3schools.com/sql/sql_like.asp
 app.get("/trees-list-search", (req, res) => {
   const sql = `
         SELECT
@@ -348,7 +348,7 @@ app.get("/trees-list-search", (req, res) => {
 
 
 
-//300
+//300 302 vote 
 app.put("/trees-vote/:id", (req, res) => {
   const sql = `
         UPDATE trees

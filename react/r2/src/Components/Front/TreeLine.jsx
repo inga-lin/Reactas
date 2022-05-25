@@ -2,9 +2,9 @@ import { useState } from "react";
 
 function TreeLine({ tree, saveVote, com }) {
 
-    const [vote, setVote] = useState(5);
+    const [vote, setVote] = useState(5);//301 nurodom kad pradinis skaicus 5
 
-    const clickVote = () => {
+    const clickVote = () => { //302
         saveVote(tree.id, vote);
     }
 
@@ -15,9 +15,9 @@ function TreeLine({ tree, saveVote, com }) {
                     <span>{tree.name}</span>
                     <span>{tree.height} m</span>
                     <span>{['Leaf','Spike','Palm'][tree.type - 1]}</span>
-                    <b>{(tree.sum / tree.count || 1).toFixed(2)}</b>
-                    <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e=>setVote(e.target.value)}></input>
-                    <button type="button" className="btn btn-outline-primary ml-2" onClick={clickVote}>Vote</button>
+                    <b>{(tree.sum / tree.count || 1).toFixed(2)}</b>{/*300 cia apsiskaiciuojam kaip tuos zmoniu balsus suskaiciuoti ir paversti i ju vertinimu vidurki ir du skaiciai po kablelio (tree.sum / tree.count jeigu cia yra 0 dalinam is vieneto*/}
+                    <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e=>setVote(e.target.value)}></input>{/*301 laikelis kuriame bus zmoniu balsai ir nurodom nuo kiek iki kiek galima balsuot nuo 1 iki 10*/}
+                    <button type="button" className="btn btn-outline-primary ml-2" onClick={clickVote}>Vote</button>{/*302*/}
                     {
                         com.filter(o => o.id === tree.id).map(c => <div key={c.cid}>{c.com}</div>)
                     }
