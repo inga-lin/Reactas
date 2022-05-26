@@ -140,6 +140,9 @@ const cors = require("cors");
 app.use(cors());
 const mysql = require("mysql");
 
+app.use(express.json({limit: '50mb'}));//505 per cia bus galima didele foto ideti
+app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
+
 app.use(express.urlencoded({
     extended: true
 }));
@@ -192,7 +195,7 @@ app.get('/trees-manager', (req, res) => {
 app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
-        m.id AS id, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments, k.id AS cid 
+        m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments, k.id AS cid 
         FROM trees AS m
         LEFT JOIN komentarai AS k
         ON m.id = k.medziai_id
@@ -237,7 +240,7 @@ app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta 
 
 //////////////////////////
 
-//5)kaip iraso nauja info i duomenu baze
+//5)kaip iraso nauja info i duomenu baze//505
 app.post('/trees-manager', (req, res) => {
     // INSERT INTO table_name (column1, column2, column3, ...)
     // VALUES (value1, value2, value3, ...);
@@ -246,14 +249,15 @@ app.post('/trees-manager', (req, res) => {
     //VALUES (?, ?, ?) -paruosiam vieta deti duomenim
     const sql = `
         INSERT INTO trees
-        (name, height, type)
-        VALUES (?, ?, ?)
+        (name, height, type, photo)
+        VALUES (?, ?, ?, ?)
     `;
 
     con.query(sql, [ //cia tvarka turi sutapt su lenteles uzrasais, ir is cia paimam ta nauja info ir sudedam i musu serveri ir po to matysim tai Tree List (paspaudus App mygtuka ir perkrovus puslapi)
         req.body.title,
         !req.body.height ? 0 : req.body.height, //jeigu aukscio lenteleje nieko neirasysim bus 0
-        req.body.type
+        req.body.type,
+        req.body.photo
     ], (err, results) => {
         if (err) {
             throw err;
@@ -357,7 +361,7 @@ app.get("/trees-list-search", (req, res) => {
 
 
 //300 302 vote 
-app.put("/trees-vote/:id", (req, res) => {
+app.post("/trees-vote/:id", (req, res) => {
   const sql = `
         UPDATE trees
         SET count = count + 1, sum = sum + ?
@@ -399,6 +403,12 @@ app.post("/trees-comment/:id", (req, res) => {
 //FROM table1
 //LEFT JOIN table2
 //ON table1.column_name = table2.column_name;
+
+
+//505
+// UPDATE table_name
+// SET column1 = value1, column2 = value2, ...
+// WHERE condition;/*
 
 
 app.listen(port, () => {

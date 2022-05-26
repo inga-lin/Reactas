@@ -57,7 +57,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     
     //302 {saveVote} ir ji perduodam i Front/TreeLine.jsx per <TreeLine>
     const saveVote = (id, value) => {
-        axios.put('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'  //http://localhost:3003/trees-vote/' linkas kuri mes issiunciam i serveri kad galetumem votint, atiduodam jam id(ka mes siunciam) ir rezultata{vote: value}
+        axios.post('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'  //http://localhost:3003/trees-vote/' linkas kuri mes issiunciam i serveri kad galetumem votint, atiduodam jam id(ka mes siunciam) ir rezultata{vote: value}
         .then(res => {
             setLastUpdate(Date.now()) //cia gaunam rezultata 
         });
