@@ -80,11 +80,11 @@ const fileInput = useRef();
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Edit tree</h5>
-                        <button type="button" className="close" onClick={() => setModalData(null)}>{/*paspaudus x per setModalData(null) bus uzdaroma modallentele */}
+                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" className="close" onClick={() => setModalData(null)}>
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        </div>
+                    </div>
                     <div className="modal-body">
                         <div className="card-body">
                             <div className="form-group">
