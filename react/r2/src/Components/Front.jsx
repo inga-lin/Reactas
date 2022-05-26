@@ -15,27 +15,27 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     const [search, setSearch] = useState('');//103 search
     const [lastUpdate, setLastUpdate] = useState(Date.now()); //302 nusikopinom is Back.jsx
 
-    const [com, setCom] = useState([]); 
+    //const [com, setCom] = useState([]); 
     // Read ir 404
     useEffect(() => {
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
             .then(res => {
                 console.log(res.data);
-                const t = new Map(); //medziai
-                const c = new Map(); //komentarai
-                res.data.forEach(o => {
-                    t.set(o.id, o);
-                    if (null !== o.cid) {
-                        c.set(o.cid, o);
-                    }
-                });
-                const ar = [];
-                t.forEach(o => ar.push(o));
-                const ar2 = [];
-                c.forEach(o => ar2.push(o));
-                setCom(ar2);
-                dispachTrees(getDataFromServer(ar));
-        })
+                // const t = new Map(); //medziai
+                // const c = new Map(); //komentarai
+                // res.data.forEach(o => {
+                //     t.set(o.id, o);
+                //     if (null !== o.cid) {
+                //         c.set(o.cid, o);
+                //     }
+                // });
+                // const ar = [];
+                // t.forEach(o => ar.push(o));
+                // const ar2 = [];
+                // c.forEach(o => ar2.push(o));
+                // setCom(ar2);
+                dispachTrees(getDataFromServer(res.data));
+            })
 }, [show, lastUpdate]);//302 lastUpdate //b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
 
     //101 serverio puseje rusiavimas
@@ -60,6 +60,14 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         axios.put('http://localhost:3003/trees-vote/' + id, {vote: value}) //arba su + '/'  //http://localhost:3003/trees-vote/' linkas kuri mes issiunciam i serveri kad galetumem votint, atiduodam jam id(ka mes siunciam) ir rezultata{vote: value}
         .then(res => {
             setLastUpdate(Date.now()) //cia gaunam rezultata 
+        });
+    }
+
+    //40004
+    const saveComment = (id, value) => {
+        axios.post('http://localhost:3003/trees-comment/' + id, {comment: value})
+        .then(res => {
+            setLastUpdate(Date.now());
         });
     }
 
@@ -90,7 +98,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-12">
                         <ul className="list-group">
                             {
-                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} com={com}></TreeLine>) //300 302saveVote//404
+                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} saveComment={saveComment}></TreeLine>) //300 302saveVote//40004
                             }
                         </ul>
                     </div>

@@ -499,7 +499,8 @@ SAVE
 jeigu viskas teisingai tai ismeta salotines spalvos uzrasa Display column was successfuly update(jeigu ne tai reik grysti atgal ir tvargyti tos antros lenteles nustatymus pagai id pirmos lenteles)
 einam paziuret ar atsirado tarp dvieju lenteliu virvute id sujunginejom su medziai_id:
 spaudziam ant sernas(kaireje puseje) -> Designer(virsuje) ir turi matytis tos dvi lenteles su virvute(vadinasi viskas ok)
-404-einam i server/ap.jx 
+
+404-komentaru atvaizdavimas-einam i server/app.jx 
 ir ten apsirasom-info https://www.w3schools.com/sql/sql_join_left.asp
 kai apsirasem galim pasitestuoti ar veikia komentarai phpMyAdmin -> spaudziam ant komentarai(kaieeje puseje)
 -> insert
@@ -508,4 +509,9 @@ GO paskutini
 ir savo puslapyje consoleje paspaudus ant medzio pasiziurim ar atvaizdavo ji
 einam i src/Fronts.jsx apsirasom
 ir i Front/TreeLine.jsx apsirasomir persidavem is Front.jsx
-*/ 
+*/
+
+/*
+2022-05-26 lengvesnis KOMENTARO aprasymas
+server/app.js, Front/TreeLine.jsx,src/Fronts.jsx  40004 ir 404 
+*/

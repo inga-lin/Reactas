@@ -187,15 +187,16 @@ app.get('/trees-manager', (req, res) => {
 //FROM table1 <- is lentels trees 
 ///LEFT JOIN table2 <- prijungiam lentele komentarai(ji turi buti kaireje puseje phpMyAdmin kur su virvute jungiam)
 //ON table1.column_name = table2.column_name; <- nusakom taisykle pagal ka jas jungiam ON m.id = k.medziai_id (trees.id ir komentarai.medziai_id)
-
+///m.id AS id, m.name, m.height, m.type, m.count, m.sum, k.con, k.id AS cid
+//m.id AS id, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.com, '-^o^-') AS comments, k.id AS cid !!! pas mane con o ne com
 app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
-        m.id AS id, m.name, m.height, m.type, m.count, m.sum, k.con, k.id AS cid
+        m.id AS id, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments, k.id AS cid 
         FROM trees AS m
         LEFT JOIN komentarai AS k
         ON m.id = k.medziai_id
-        
+        GROUP BY m.id
     `;
         con.query(sql, (err, result) => {
         if (err) throw err;
@@ -374,6 +375,24 @@ app.put("/trees-vote/:id", (req, res) => {
   );
 });
 
+//40004 comentaras
+app.post("/trees-comment/:id", (req, res) => {
+  const sql = `
+    INSERT INTO komentarai
+    (con, medziai_id)
+    VALUES (?, ?)
+    `;
+  con.query(
+    sql,
+    [req.body.comment, req.params.id],
+    (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.send(results);
+    }
+  );
+});
 
 //404 lenteliu apjungimas
 //SELECT column_name(s)

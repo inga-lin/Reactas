@@ -11,3 +11,22 @@
         }
     }
 }
+
+.tree-line {
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        &__comments {
+            width: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+            div {
+                margin: 10px;
+            }
+        }
+        img {
+            width: 200px;
+            height: auto;
+        }
+    }
+}
