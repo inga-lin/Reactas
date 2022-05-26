@@ -485,5 +485,27 @@ id            mediumint                           PRIMARY    x
 medziai_id    mediumint               UNSIGNED 
 -------sita medziu_id type ir atributes turi sutapti su trees id kur nurodem type ir atributes !!!--------------
 com            varchar         500
+(com- komentars)
 SAVE
+
+LENTELIU APJUNGIMAS 404
+virsuje spaudziam ant Relation view
+ON DELETE pasirenkam CASCADE(istrynus medi issitrins ir jo komentaras)
+Column nustatom ant medziu_id
+Database - sernas
+Table - trees
+colum - automatiskai parinko id
+SAVE
+jeigu viskas teisingai tai ismeta salotines spalvos uzrasa Display column was successfuly update(jeigu ne tai reik grysti atgal ir tvargyti tos antros lenteles nustatymus pagai id pirmos lenteles)
+einam paziuret ar atsirado tarp dvieju lenteliu virvute id sujunginejom su medziai_id:
+spaudziam ant sernas(kaireje puseje) -> Designer(virsuje) ir turi matytis tos dvi lenteles su virvute(vadinasi viskas ok)
+404-einam i server/ap.jx 
+ir ten apsirasom-info https://www.w3schools.com/sql/sql_join_left.asp
+kai apsirasem galim pasitestuoti ar veikia komentarai phpMyAdmin -> spaudziam ant komentarai(kaieeje puseje)
+-> insert
+kur medzio_id VALUE-parenkam koki nors medi is duotu pasirinkimu ir com kur didesne lentele irasom komentara
+GO paskutini
+ir savo puslapyje consoleje paspaudus ant medzio pasiziurim ar atvaizdavo ji
+einam i src/Fronts.jsx apsirasom
+ir i Front/TreeLine.jsx apsirasomir persidavem is Front.jsx
 */ 

@@ -16,7 +16,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     const [lastUpdate, setLastUpdate] = useState(Date.now()); //302 nusikopinom is Back.jsx
 
     const [com, setCom] = useState([]); 
-    // Read
+    // Read ir 404
     useEffect(() => {
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
             .then(res => {
@@ -90,7 +90,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-12">
                         <ul className="list-group">
                             {
-                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} com={com}></TreeLine>) //300 302saveVote
+                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} com={com}></TreeLine>) //300 302saveVote//404
                             }
                         </ul>
                     </div>

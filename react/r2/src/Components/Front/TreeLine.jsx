@@ -19,7 +19,7 @@ function TreeLine({ tree, saveVote, com }) {
                     <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e=>setVote(e.target.value)}></input>{/*301 laikelis kuriame bus zmoniu balsai ir nurodom nuo kiek iki kiek galima balsuot nuo 1 iki 10*/}
                     <button type="button" className="btn btn-outline-primary ml-2" onClick={clickVote}>Vote</button>{/*302*/}
                     {
-                        com.filter(o => o.id === tree.id).map(c => <div key={c.cid}>{c.com}</div>)
+                        com.filter(o => o.id === tree.id).map(c => <div key={c.cid}>{c.com}</div>)//404 cia yra komentaru vieta
                     }
                 </div>
             </div>

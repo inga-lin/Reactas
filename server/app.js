@@ -181,6 +181,13 @@ app.get('/trees-manager', (req, res) => {
 /////////////////////////////////// 404
 //b.apsirasom Fronts.jsx useEffect
 //b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
+//SELECT column_name(s) <- cia isvardinam abieju lenteliu stulpelius
+//???? is kur tas cid - k.id AS cid- cia mes pervadinom savo k.id i cid
+//m.id AS id - irgi pervadinom (kazkodel neitraukem i ta sarasa medziai_id)
+//FROM table1 <- is lentels trees 
+///LEFT JOIN table2 <- prijungiam lentele komentarai(ji turi buti kaireje puseje phpMyAdmin kur su virvute jungiam)
+//ON table1.column_name = table2.column_name; <- nusakom taisykle pagal ka jas jungiam ON m.id = k.medziai_id (trees.id ir komentarai.medziai_id)
+
 app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
