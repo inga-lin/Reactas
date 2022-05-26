@@ -166,22 +166,46 @@ app.get('/', (req, res) => {
 })
 
 //kaip nuskaito
-app.get('/trees-manager', (req, res) => {
+//app.get('/trees-manager', (req, res) => {
     // SELECT column1, column2, ...
     // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
-    const sql = `
-        SELECT
-        *
-        FROM trees
-    `;
-    con.query(sql, function(err, result) {
-        if (err) throw err;
-        res.json(result);
-    });
+ //   const sql = `
+   //     SELECT
+     //   *
+//        FROM trees
+//    `;
+ //   con.query(sql, function(err, result) {
+ //       if (err) throw err;
+ //       res.json(result);
+  //  });
+
+//});
+
+///////////////////////606 atvaizduos beke comentus
+app.get('/trees-manager', (req, res) => {
+  // SELECT column1, column2, ...
+  // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
+  const sql = `
+  SELECT
+  m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
+  FROM trees AS m
+  LEFT JOIN komentarai AS k
+  ON m.id = k.medziai_id
+  GROUP BY m.id
+`;
+  con.query(sql, function(err, result) {
+      if (err) throw err;
+      res.json(result);
+  });
 
 });
 
-/////////////////////////////////// 404
+
+
+
+
+
+/////////////////////////////////// 404//
 //b.apsirasom Fronts.jsx useEffect
 //b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
 //SELECT column_name(s) <- cia isvardinam abieju lenteliu stulpelius
@@ -192,7 +216,7 @@ app.get('/trees-manager', (req, res) => {
 //ON table1.column_name = table2.column_name; <- nusakom taisykle pagal ka jas jungiam ON m.id = k.medziai_id (trees.id ir komentarai.medziai_id)
 ///m.id AS id, m.name, m.height, m.type, m.count, m.sum, k.con, k.id AS cid
 //m.id AS id, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.com, '-^o^-') AS comments, k.id AS cid !!! pas mane con o ne com
-app.get("/trees-list/all", (req, res) => { //all atskiras routas visu medziu gavimui
+app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
         m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments, k.id AS cid 
@@ -369,7 +393,7 @@ app.post("/trees-vote/:id", (req, res) => {
     `;
   con.query(
     sql,
-    [req.body.vote, req.params.id],
+    [Math.max(Math.min(req.body.vote, 10), 1), req.params.id],
     (err, results) => {
       if (err) {
         throw err;
@@ -445,6 +469,20 @@ app.put("/trees-manager/:id", (req, res) => {
     }
   );
 });
+
+///cia sutvarkyt 606
+app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
+  const sql = `
+     DELETE FROM komentarai
+      WHERE id = ?
+      `;
+  con.query(sql, [req.params.id], (err, result) => { //[req.params.id] yra = '/trees-manager/:id'
+      if (err) {
+          throw err;
+      }
+      res.send(result);
+  })
+})
 
 
 app.listen(port, () => {

@@ -72,6 +72,13 @@ function Back() {
   },[deleteId])
 
 
+  const deleteComment = id => {
+    axios.delete('http://localhost:3003/trees-delete-comment/' + id, ) //cia nepamirsti prie http galo prirasyti / ir prideti deleteId objekta su savybe id(jis istrins visa eilutes info) //delete-istrinti
+    .then(res => {
+      console.log(res);
+      setLastUpdate(Date.now());//7paskutinis pakeitimas turi buti dabartine Data
+    });
+  }
   return (
     <>
     <div className="container">
@@ -87,7 +94,7 @@ function Back() {
             <div className="card-body">
               <ul className="list-group">
                 {
-                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData}></TreeLine>)
+                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData} deleteComment={deleteComment}></TreeLine>)
                 }
               </ul>
             </div>
@@ -95,7 +102,7 @@ function Back() {
         </div>
       </div>
     </div>
-      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
+      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData} ></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
     </>
   );
 }

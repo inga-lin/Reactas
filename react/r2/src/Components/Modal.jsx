@@ -11,52 +11,53 @@ const [id, setId] = useState('0');
 const [remove, setRemove] = useState(false);
 const fileInput = useRef();
 
-    const buttonHandler = () => {
-        const file = fileInput.current.files[0];
+const buttonHandler = () => {
+    const file = fileInput.current.files[0];
 
-        if (file) {
-            getBase64(file)
-                .then(photo => {
-                    console.log(photo);
-                    setEditData({
-                        title,
-                        height,
-                        type,
-                        id,
-                        photo,
-                        del: remove ? 1 : 0
-                    });
-                    setModalData(null);
-                    setRemove(false);
+    if (file) {
+        getBase64(file)
+            .then(photo => {
+                console.log(photo);
+                setEditData({
+                    title,
+                    height,
+                    type,
+                    id,
+                    photo,
+                    del: remove ? 1 : 0
                 });
-        } else {
-            setEditData({
-                title,
-                height,
-                type,
-                id,
-                photo: '',
-                del: remove ? 1 : 0
+                setModalData(null);
+                setRemove(false);
             });
-            setModalData(null);
-            setRemove(false);
-        }
+    } else {
+        setEditData({
+            title,
+            height,
+            type,
+            id,
+            photo: '',
+            del: remove ? 1 : 0
+        });
+        setModalData(null);
+        setRemove(false);
     }
+}
 
-    const inputHandler = (e, which) => {
-        switch (which) {
-            case 'title':
-                setTitle(e.target.value);
-                break;
-            case 'height':
-                setHeight(e.target.value.replace(/,/g, '.'));
-                break;
-            case 'type':
-                setType(e.target.value);
-                break;
-            default:
-        }
+const inputHandler = (e, which) => {
+    switch (which) {
+        case 'title':
+            setTitle(e.target.value);
+            break;
+        case 'height':
+            setHeight(e.target.value.replace(/,/g, '.'));
+            break;
+        case 'type':
+            setType(e.target.value);
+            break;
+        default:
     }
+}
+
 
     useEffect(() => {
         if (modalData === null) { //9jeigu modalData === null modale nebus duomenu ir uzsidarys modalas
