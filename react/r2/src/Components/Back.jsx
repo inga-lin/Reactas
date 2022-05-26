@@ -527,4 +527,6 @@ atgal i vsc
 susikuriam src folderi Functions ir failiuka getBase64js
  i app.js idedam nuotrauka ir apsirasom jos dydi front.css
  ir galim paziureti ja http://localhost:3000/
+
+ MODALA reik sutvarkyti 600
 */

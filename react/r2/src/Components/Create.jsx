@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import getBase64 from "../Functions/getBase64";
 //cia Add New Tree lentele
 
-function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is App.jsx*/}
+function Create({ setCreateData }) { //{/*3pasiimam per cia savo setCreateData is App.jsx*/}
     //kadangi turim 3 irasymo laukelius tai turim juos sukontroliuoti(Tree title)
     const [title, setTitle] = useState('');//(Tree title-)
     const [height, setHeight] = useState('');//(Tree height)
@@ -90,7 +90,7 @@ function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is 
                                 </div>
                             </div>
                             <div className="buttons">
-                                <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Add</button>
+                            <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Add</button>
                             </div>
                         </div>
                     </div>

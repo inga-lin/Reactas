@@ -408,7 +408,43 @@ app.post("/trees-comment/:id", (req, res) => {
 //505
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
-// WHERE condition;/*
+// WHERE condition;
+app.put("/trees-manager/:id", (req, res) => {
+  let sql;
+  let args;
+    if('' === req.body.photo && req.body.del == 0) {
+      sql = `
+        UPDATE trees
+        SET name = ?, type = ?, height = ?
+        WHERE id = ?
+    `;
+      args = [req.body.title, req.body.type, req.body.height, req.params.id];
+    } else if(1 == req.body.del) {
+        sql = `
+        UPDATE trees
+        SET name = ?, type = ?, height = ?, photo = NULL
+        WHERE id = ?
+    `;
+    args = [req.body.title, req.body.type, req.body.height, req.params.id];
+    } else {
+      sql = `
+      UPDATE trees
+      SET name = ?, type = ?, height = ?, photo = ?
+      WHERE id = ?
+  `;
+  args = [req.body.title, req.body.type, req.body.height, req.body.photo, req.params.id];
+    }
+  con.query(
+    sql,
+    args,
+    (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.send(results);
+    }
+  );
+});
 
 
 app.listen(port, () => {
