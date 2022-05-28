@@ -7,7 +7,7 @@ import Create from './Create';
 import TreeLine from './TreeLine';
 import Modal from './Modal';
 import CreateSize from './CreateSize'; //606
-
+import SizeList from './SizeList';
 // cia Tree List lentele
 
 function Back() {
@@ -24,6 +24,7 @@ function Back() {
   const [lastUpdate, setLastUpdate] = useState(Date.now()); //liks useState//7.cia bus data kada pirma karta reactas uzsikrauna puslapi
 
   const [createSizeData, setCreateSizeData] = useState(null);
+  const [sizes, setSizes] = useState([]);
   // Read 
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
@@ -81,13 +82,36 @@ function Back() {
       setLastUpdate(Date.now());//7paskutinis pakeitimas turi buti dabartine Data
     });
   }
+
+
+  useEffect(() => {
+    axios.get('http://localhost:3003/trees-sizes')
+        .then(res => {
+            console.log(res.data);
+            setSizes(res.data);
+        })
+}, [lastUpdate]);
+
+
+useEffect(() => {
+  if (null === createSizeData) {
+    return;
+  }
+  axios.post('http://localhost:3003/trees-size', createSizeData)
+  .then(res => {
+    console.log(res);
+    setLastUpdate(Date.now());
+  });
+},[createSizeData]);
+
   return (
     <>
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <Create setCreateData={setCreateData}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
+          <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
           <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>
+          <SizeList sizes={sizes}></SizeList>
         </div>
         <div className="col-8">
           <div className="card m-2">
@@ -97,7 +121,7 @@ function Back() {
             <div className="card-body">
               <ul className="list-group">
                 {
-                  trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData} deleteComment={deleteComment}></TreeLine>)
+                   trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData} deleteComment={deleteComment}></TreeLine>)
                 }
               </ul>
             </div>
@@ -105,7 +129,7 @@ function Back() {
         </div>
       </div>
     </div>
-      <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData} ></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
+    <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
     </>
   );
 }

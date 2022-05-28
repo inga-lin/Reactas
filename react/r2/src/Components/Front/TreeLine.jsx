@@ -19,9 +19,9 @@ function TreeLine({ tree, saveVote, saveComment }) {
                 <div className="tree-line__content">
                     <span>{tree.name}</span>
                     <span>{tree.height} m</span>
-                    <span>{['Leaf','Spike','Palm'][tree.type - 1]}</span>
+                    <span>{['Leaf', 'Spike', 'Palm'][tree.type - 1]}</span>
                     <b>{(tree.sum / tree.count || 1).toFixed(2)}</b>{/*300 cia apsiskaiciuojam kaip tuos zmoniu balsus suskaiciuoti ir paversti i ju vertinimu vidurki ir du skaiciai po kablelio (tree.sum / tree.count jeigu cia yra 0 dalinam is vieneto*/}
-                    <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e=>setVote(e.target.value)}></input>{/*301 laikelis kuriame bus zmoniu balsai ir nurodom nuo kiek iki kiek galima balsuot nuo 1 iki 10*/}
+                    <input type="number" min="1" max="10" className="ml-2" value={vote} onChange={e => setVote(e.target.value)}></input>{/*301 laikelis kuriame bus zmoniu balsai ir nurodom nuo kiek iki kiek galima balsuot nuo 1 iki 10*/}
                     <button type="button" className="btn btn-outline-primary ml-2" onClick={clickVote}>Vote</button>{/*302*/}
                     <button type="button" className="btn btn-outline-success ml-2" onClick={clickComment}>Comment</button>
 
