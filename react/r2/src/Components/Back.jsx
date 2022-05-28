@@ -6,6 +6,7 @@ import '../back.scss';
 import Create from './Create';
 import TreeLine from './TreeLine';
 import Modal from './Modal';
+import CreateSize from './CreateSize'; //606
 
 // cia Tree List lentele
 
@@ -22,6 +23,7 @@ function Back() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now()); //liks useState//7.cia bus data kada pirma karta reactas uzsikrauna puslapi
 
+  const [createSizeData, setCreateSizeData] = useState(null);
   // Read 
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
@@ -85,6 +87,7 @@ function Back() {
       <div className="row">
         <div className="col-4">
           <Create setCreateData={setCreateData}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
+          <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>
         </div>
         <div className="col-8">
           <div className="card m-2">

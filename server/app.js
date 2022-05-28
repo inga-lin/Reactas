@@ -142,14 +142,14 @@ const mysql = require("mysql");
 
 app.use(express.json({limit: '50mb'}));//505 per cia bus galima didele foto ideti
 app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
-
+//+
 app.use(express.urlencoded({
     extended: true
 }));
     
-app.use(express.json());
+app.use(express.json());//+
 
-
+//+
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -158,10 +158,10 @@ const con = mysql.createConnection({
     });
 
 
-//Route
+//Route+
 //jis nurodo kokius puslapus paleidzia routas http://localhost:3003/ http://localhost:3003/trees-manager
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send('Hello Bebraiiii!')
 })
 
@@ -181,7 +181,7 @@ app.get('/', (req, res) => {
 
 //});
 
-///////////////////////606 atvaizduos beke comentus
+///////////////////////606 atvaizduos beke comentus+
 app.get('/trees-manager', (req, res) => {
   // SELECT column1, column2, ...
   // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
@@ -205,7 +205,7 @@ app.get('/trees-manager', (req, res) => {
 
 
 
-/////////////////////////////////// 404//
+/////////////////////////////////// 404//+
 //b.apsirasom Fronts.jsx useEffect
 //b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
 //SELECT column_name(s) <- cia isvardinam abieju lenteliu stulpelius
@@ -246,7 +246,7 @@ app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavi
 //});
 
 
-
+//+
 app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta all iesko 'leaf','spike','palm' ir kazkuri is ju atidaro
     if (req.params.cat != "all") {
     const sql = `
@@ -264,7 +264,7 @@ app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta 
 
 //////////////////////////
 
-//5)kaip iraso nauja info i duomenu baze//505
+//5)kaip iraso nauja info i duomenu baze//505+
 app.post('/trees-manager', (req, res) => {
     // INSERT INTO table_name (column1, column2, column3, ...)
     // VALUES (value1, value2, value3, ...);
@@ -291,7 +291,7 @@ app.post('/trees-manager', (req, res) => {
 
 });
 
-//8. Trina medzius
+//8. Trina medzius+
 // DELETE FROM table_name
 // WHERE some_column = some_value
 app.delete('/trees-manager/:id', (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
@@ -307,32 +307,33 @@ app.delete('/trees-manager/:id', (req, res) => { //delytinam is trees lnteles ku
     })
 })
 
+//NEBERA SITO -----------------
 // 10.Redaguoja medzius
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
 // WHERE condition;
-app.put('/trees-manager/:id', (req, res) => {
-    const sql = `
-        UPDATE trees
-        SET name = ?, height = ?, type = ?
-        WHERE id = ?
-    `;
-    con.query(sql, [
-        req.body.title,
-        req.body.height,
-        req.body.type,
-        req.params.id
-    ], (err, results) => {
-        if (err) {
-            throw err;
-        }
-        res.send(results);
-    })
-})
+//app.put('/trees-manager/:id', (req, res) => {
+ //   const sql = `
+//        UPDATE trees
+//        SET name = ?, height = ?, type = ?
+//        WHERE id = ?
+//    `;
+//    con.query(sql, [
+//        req.body.title,
+//        req.body.height,
+//        req.body.type,
+//        req.params.id
+//    ], (err, results) => {
+//        if (err) {
+//            throw err;
+//        }
+//        res.send(results);
+//    })
+//})
 
 
 
-//101 sortinam name ir height
+//101 sortinam name ir height+
 // SELECT column1, column2, ...
 // FROM table_name
 // ORDER BY column1, column2, ... ASC|DESC;
@@ -362,7 +363,7 @@ app.get("/trees-list-sorted/", (req, res) => {
 });
 //trees
 
-//103 search paiska pagal pavadinima name
+//103 search paiska pagal pavadinima name+
 // SELECT column1, column2, ...
 // FROM table_name
 // WHERE columnN LIKE pattern;
@@ -384,7 +385,7 @@ app.get("/trees-list-search", (req, res) => {
 
 
 
-//300 302 vote 
+//300 302 vote +
 app.post("/trees-vote/:id", (req, res) => {
   const sql = `
         UPDATE trees
@@ -403,7 +404,7 @@ app.post("/trees-vote/:id", (req, res) => {
   );
 });
 
-//40004 comentaras
+//40004 comentaras+
 app.post("/trees-comment/:id", (req, res) => {
   const sql = `
     INSERT INTO komentarai
@@ -429,7 +430,7 @@ app.post("/trees-comment/:id", (req, res) => {
 //ON table1.column_name = table2.column_name;
 
 
-//505
+//505+
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
 // WHERE condition;
@@ -470,7 +471,7 @@ app.put("/trees-manager/:id", (req, res) => {
   );
 });
 
-///cia sutvarkyt 606
+///cia sutvarkyt 606++
 app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
   const sql = `
      DELETE FROM komentarai
@@ -485,6 +486,50 @@ app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnt
 })
 
 
+
+//700+
+//medziu dyddziai
+app.get("/trees-sizes", (req, res) => {
+  const sql = `
+  SELECT
+  *
+  FROM dydziai
+`;
+con.query(sql, (err, result) => {
+if (err) throw err;
+res.send(result);
+
+});
+});
+
+//701+
+//medzio dydis
+app.post("/trees-size", (req, res) => {
+  // INSERT INTO table_name (column1, column2, column3, ...)
+  // VALUES (value1, value2, value3, ...);
+  const sql = `
+        INSERT INTO dydziai
+        (size)
+        VALUES (?)
+    `;
+
+  con.query(
+    sql,
+    [req.body.size],
+    (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.send(results);
+    }
+  );
+});
+
+//+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
+//trees-delete-comment/:id
+//trees-sizes
