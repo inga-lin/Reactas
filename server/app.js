@@ -141,7 +141,7 @@ app.use(cors());
 const mysql = require("mysql");
 
 app.use(express.json({limit: '50mb'}));//505 per cia bus galima didele foto ideti
-app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
+//app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
 //+
 app.use(express.urlencoded({
     extended: true
@@ -149,7 +149,7 @@ app.use(express.urlencoded({
     
 app.use(express.json());//+
 
-//+
+//++
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
