@@ -32,7 +32,7 @@ function TreeLine({ tree, saveVote, saveComment }) {
                     </div>
 
                     <div className="image-holder ml-4">
-                        <img src={tree.photo}></img>
+                        <img alt="foto" src={tree.photo}></img>
                     </div>
                     
                     

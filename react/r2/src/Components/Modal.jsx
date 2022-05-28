@@ -127,7 +127,7 @@ const inputHandler = (e, which) => {
                                         </div>
                                     </div>
                                     <div className="col-10">
-                                        {modalData.photo ? <img className="photo" src={modalData.photo}></img> : null}
+                                        {modalData.photo ? <img alt="foto" className="photo" src={modalData.photo}></img> : null}
                                     </div>
 
                                 </div>
