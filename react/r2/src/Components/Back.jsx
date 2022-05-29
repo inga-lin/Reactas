@@ -466,7 +466,38 @@ app.get("/trees-list/:cat", (req, res) => {
 */
 
 
+/////////////////////////////////////////////////////////////////////////////////
 
+
+//Dar galim i react/r2/public/index.html isikelti  i body> vidu
+//    <!--d.cia rodykles ikelem-->
+//	    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+//	      <symbol id="arrow" viewBox="0 0 512 512"><path d="M295.6 163.7c-5.1 5-5.1 13.3-.1 18.4l60.8 60.9H124.9c-7.1 0-12.9 5.8-12.9 13s5.8 13 12.9 13h231.3l-60.8 60.9c-5 5.1-4.9 13.3.1 18.4 5.1 5 13.2 5 18.3-.1l82.4-83c1.1-1.2 2-2.5 2.7-4.1.7-1.6 1-3.3 1-5 0-3.4-1.3-6.6-3.7-9.1l-82.4-83c-4.9-5.2-13.1-5.3-18.2-.3z"/></symbol>
+//	    </svg>
+//
+//Ji naudosim Front.jsx
+ //                      <svg className="up">
+ //                           <use xlinkHref="#arrow"></use> 
+ //                       </svg>
+ //                       <svg className="down">
+//                            <use xlinkHref="#arrow"></use> {/*d.cia bus rodykles is googles svg arrow ir front.scss pasisukam kaip mums reik*/}
+//                        </svg>
+//                        </div>
+
+
+
+
+
+//Ir srifta i <head> vidu
+
+  //  <link rel="preconnect" href="https://fonts.googleapis.com">
+//	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+//	<link href="https://fonts.googleapis.com/css2?family=Akshar:wght@400;600&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+//O ji isikelt i savo css
+//font-family: 'Akshar', sans-serif;
+//}
+///////////////////////////////////////////////////////////////////////////////
 
 /*
 2022-05-23
