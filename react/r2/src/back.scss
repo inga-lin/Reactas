@@ -7,6 +7,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  
 }
 
 .tree-line {
@@ -26,5 +27,23 @@ div#modal {
   .photo {
     height: 122px;
     width: auto;
+    //cursor: url("https://i.stack.imgur.com/bUGV0.png"), auto;
+
   }
+}
+
+.deletle {
+  cursor: url(./trash.png)5 65, auto !important;
+}
+
+.edit {
+  cursor: url(./edit.png)5 25, auto !important;
+}
+
+.save {
+  cursor: url(./save.png)5 5, auto !important;
+}
+
+.cancel {
+  cursor: url(./cancel.png)5 5, auto !important;
 }

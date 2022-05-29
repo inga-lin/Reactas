@@ -121,9 +121,9 @@ const inputHandler = (e, which) => {
                                         </div>
                                     </div>
                                     <div className="col-2">
-                                        <div class="form-group form-check">
+                                        <div className="form-group form-check">
                                             <input type="checkbox" className="form-check-input" onChange={() => setRemove(r => !r)}  checked={remove} />{/*600 istrinam nuotrauka jeigu uzdesim varnele*/}
-                                            <label class="form-check-label">Delete Photo</label>
+                                            <label className="form-check-label">Delete Photo</label>
                                         </div>
                                     </div>
                                     <div className="col-10">
@@ -135,8 +135,8 @@ const inputHandler = (e, which) => {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-outline-primary m-3" onClick={buttonHandler}>Save</button>
-                        <button type="button" className="btn btn-outline-danger m-3" onClick={() => setModalData(null)}>Cancel</button>
+                        <button type="button" className="btn btn-outline-primary m-3 save" onClick={buttonHandler}>Save</button>
+                        <button type="button" className="btn btn-outline-danger m-3 cancel" onClick={() => setModalData(null)}>Cancel</button>
                     </div>
                 </div>
             </div>

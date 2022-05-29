@@ -165,7 +165,7 @@ app.get("/", (req, res) => {
   res.send('Hello Bebraiiii!')
 })
 
-//kaip nuskaito
+//kaip nuskaito atvaizduoja info(cia be comentu beckende)
 //app.get('/trees-manager', (req, res) => {
     // SELECT column1, column2, ...
     // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
@@ -181,10 +181,11 @@ app.get("/", (req, res) => {
 
 //});
 
-///////////////////////606 atvaizduos beke comentus+
+///////////////////////700 atvaizduos bekende comentus+
 app.get('/trees-manager', (req, res) => {
   // SELECT column1, column2, ...
   // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
+  //AS cid - yra komentaro id
   const sql = `
   SELECT
   m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
@@ -205,7 +206,7 @@ app.get('/trees-manager', (req, res) => {
 
 
 
-/////////////////////////////////// 404//+KOMENTARO aprasymas//505 ir cia isidedam m.photo,
+/////////////////////////////////// 404//+KOMENTARO aprasymas fronte//505 ir cia isidedam m.photo,
 //???? is kur tas cid - k.id AS cid- cia mes pervadinom savo k.id i cid
 //m.id AS id - irgi pervadinom (kazkodel neitraukem i ta sarasa medziai_id)
 //FROM table1 <- is lentels trees 
@@ -395,7 +396,7 @@ app.post("/trees-vote/:id", (req, res) => {
     `;
   con.query(
     sql,
-    [Math.max(Math.min(req.body.vote, 10), 1), req.params.id],//vote atejo is Front/TreeLine.jsx const [vote, setVote] = useState(5);
+    [Math.max(Math.min(req.body.vote, 10), 1), req.params.id],//vote atejo is Front/TreeLine.jsx const [vote, setVote] = useState(5);//jei parasysim 100 vote vietoje tai bus vistiek 10 jeigu parasysim -5 tai bus 1
     (err, results) => {
       if (err) {
         throw err;

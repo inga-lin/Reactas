@@ -601,3 +601,10 @@ ir apsirasom jos dydi front.css
  Modal.jsx pasitvarkom (nepamirst susiimportint import { useEffect, useState, useRef } from "react";import getBase64 from "../Functions/getBase64";)
  server/app.js apsirasom
 */
+
+/*
+2022-05-27
+700 komentarai atvaizduoti admine
+app.js app.get('/trees-manager', (req, res) => { pasoredaguojam
+Conponent/TreeLine.jsx prisidedam info
+*/
