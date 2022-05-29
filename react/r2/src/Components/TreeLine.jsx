@@ -1,4 +1,4 @@
-function TreeLine({ tree, setDeleteId, setModalData, deleteComment }) {//700 deleteComment
+function TreeLine({ tree, setDeleteId, setModalData, deleteComment }) {//700 deleteComment ji atsinesam is Back.jsx
 // Tree List lentele
 return (
     <li className="list-group-item">
@@ -17,7 +17,7 @@ return (
             {                       
             tree.comments ? tree.comments.slice(0, -5).split('-^o^-,').map((c, i) => (
                 <li className="list-group-item" key={i}>
-                    {c} {/*c-komentaras*/}
+                    {c} {/*c-komentaras*/}{/*tree.cid.-komentaru id*/}
                         <div>
                             <button type="button" onClick={() => deleteComment(tree.cid.split(',')[i])} className="btn btn-outline-danger mt-3 deletle">Delete</button>{/*700 komentaro istrinimas*/}
                          </div>

@@ -75,7 +75,7 @@ function Back() {
   },[deleteId])
 
 
-  const deleteComment = id => {
+  const deleteComment = id => {//700 istrinam komentarus is Components/TreeLine.jsx
     axios.delete('http://localhost:3003/trees-delete-comment/' + id, ) //cia nepamirsti prie http galo prirasyti / ir prideti deleteId objekta su savybe id(jis istrins visa eilutes info) //delete-istrinti
     .then(res => {
       console.log(res);
@@ -121,7 +121,7 @@ useEffect(() => {
             <div className="card-body">
               <ul className="list-group">
                 {
-                   trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData} deleteComment={deleteComment}></TreeLine>)
+                   trees.map(t => <TreeLine key={t.id} tree={t} setDeleteId={setDeleteId} setModalData={setModalData} deleteComment={deleteComment}></TreeLine>)// 700 deleteComment
                 }
               </ul>
             </div>
@@ -607,4 +607,26 @@ ir apsirasom jos dydi front.css
 700 komentarai atvaizduoti admine
 app.js app.get('/trees-manager', (req, res) => { pasoredaguojam
 Conponent/TreeLine.jsx prisidedam info
+Back.jsx apsirasom deleteComment.
+ir trinima apsirasom app.js app.delete("/trees-delete-comment/:id", (req, res) => {
+
+800 medis turi tureti atskira lentele su medzio aukscio pasirinkimu
+susikuriam nauje lentele phpMyAdmin
+sernas/New 
+Table name: dydziai
+Name  Type        Length    Index     A_I
+id     INT                   Primary   x
+size   VARCHER     66
+SAVE
+reik trees lenteleje prideti papildoma eilute dydziai_id
+spaudziam kaireje ant trees -> structure
+tada zemiau Add: 1 columns(s): alter photo GO
+Name          Type      Default
+dydziai_id     INT      Null
+SAVE
+trees-> structure -> Relation view 
+ON DELETLE: SET NULL, ON UPDATE: RESTRICT, COLUMN : dydziai_id, Table: dydziai, Column: id
+SAVE
+Tada einam ant sernas -> Designer turim matyti jau tris sujungtas lenteles
+
 */

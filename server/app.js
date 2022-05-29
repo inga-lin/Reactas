@@ -493,7 +493,7 @@ app.put("/trees-manager/:id", (req, res) => {
   );
 });
 
-///cia sutvarkyt 404 606?+
+///700 komentaru istrinimas is beckendo puses+
 app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
   const sql = `
      DELETE FROM komentarai
