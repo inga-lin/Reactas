@@ -509,7 +509,7 @@ app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnt
 
 
 
-//700+
+//800+
 //medziu dyddziai
 app.get("/trees-sizes", (req, res) => {
   const sql = `
@@ -524,8 +524,8 @@ res.send(result);
 });
 });
 
-//701+
-//medzio dydis
+//800+
+//turi irasineti i duomenu baze size
 app.post("/trees-size", (req, res) => {
   // INSERT INTO table_name (column1, column2, column3, ...)
   // VALUES (value1, value2, value3, ...);

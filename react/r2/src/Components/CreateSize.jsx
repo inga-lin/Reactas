@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-//cia Add New Tree lentele
+//800
 
 function CreateSize({setCreateSizeData}) { //{/*3pasiimam per cia savo setCreateData is App.jsx*/}
     //kadangi turim 3 irasymo laukelius tai turim juos sukontroliuoti(Tree title)
     const [size, setSize] = useState('');//(Tree title-)
 
     const sizeHandler = () => {
-        setCreateSizeData({size});
-        setSize('');
+        setCreateSizeData({size});//atiduodam objekta
+        setSize('');//isvalom ta setSize
     }
 
     return (
