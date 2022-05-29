@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import getBase64 from "../Functions/getBase64";
+import getBase64 from "../Functions/getBase64";//505
 //cia Add New Tree lentele
 //import axios from 'axios';
 
@@ -8,29 +8,30 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
     const [title, setTitle] = useState('');//(Tree title-)
     const [height, setHeight] = useState('');//(Tree height)
     const [type, setType] = useState('1');//(Tree type ir kadangi jis uzstatytas su pasirinkimu tai parasom '1')
+    
     const [size, setSize] = useState('0');
     const fileInput = useRef(); //505
 
     const buttonHandler = () => {
-        const file = fileInput.current.files[0];
+        const file = fileInput.current.files[0];//505
 
-        if (file) {
-            getBase64(file)
-            .then(photo => {
-                console.log(photo);
-                setCreateData({
-                    title,
-                    height,
-                    type,
-                    photo
-                });
-            });
-        } else {
+        if (file) {//505
+            getBase64(file)//505
+            .then(photo => {//505
+                console.log(photo);//505
+                setCreateData({//505
+                    title,//505
+                    height,//505
+                    type,//505
+                    photo//505
+                });//505
+            });//505
+        } else {//505
             setCreateData({
                 title,
                 height,
                 type,
-                photo: null
+                photo: null//505
             });
         }
         setTitle('');
@@ -99,7 +100,7 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
                             </div>
                         </div>
                         <div className="col-12">
-                            <div className="form-group">
+                            <div className="form-group">{/*505 per cia idesim nuotraukas*/}
                                 <label>Photo</label>
                                 <input ref={fileInput} type="file" className="form-control" />
                                 <small className="form-text text-muted">Tree photo.</small>
@@ -115,30 +116,6 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
     )
 }
 export default Create;
-
-/*
-    return (
-        <div className="card m-4">
-            <div className="card-header">
-                <h2>Add New Tree</h2>
-            </div>
-            <div className="card-body">
-                <div className="form-group">
-                    <label >Tree title</label>
-                    <input type="text" className="form-control" />
-                    <small  className="form-text text-muted">Add new tree name here</small>
-                </div>
-            </div>
-            <div className="card-body">
-                <div className="form-group">
-                    <label >Tree height</label>
-                    <input type="text" className="form-control" />
-                    <small  className="form-text text-muted">Tree height here</small>
-                </div>
-            </div>
-        </div>
-    )
-*/
 
 /*
 function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is App.jsx
@@ -180,4 +157,28 @@ function Create({setCreateData}) { //{/*3pasiimam per cia savo setCreateData is 
             default: //2ir juos sukisam irgi i imputus(onChange={e => inputHandler(e, 'title')},onChange={e => inputHandler(e, 'height')}, onChange={e => inputHandler(e, 'type')})
         }
     }
+*/
+
+/*
+    return (
+        <div className="card m-4">
+            <div className="card-header">
+                <h2>Add New Tree</h2>
+            </div>
+            <div className="card-body">
+                <div className="form-group">
+                    <label >Tree title</label>
+                    <input type="text" className="form-control" />
+                    <small  className="form-text text-muted">Add new tree name here</small>
+                </div>
+            </div>
+            <div className="card-body">
+                <div className="form-group">
+                    <label >Tree height</label>
+                    <input type="text" className="form-control" />
+                    <small  className="form-text text-muted">Tree height here</small>
+                </div>
+            </div>
+        </div>
+    )
 */

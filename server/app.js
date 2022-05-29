@@ -205,10 +205,7 @@ app.get('/trees-manager', (req, res) => {
 
 
 
-/////////////////////////////////// 404//+
-//b.apsirasom Fronts.jsx useEffect
-//b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
-//SELECT column_name(s) <- cia isvardinam abieju lenteliu stulpelius
+/////////////////////////////////// 404//+KOMENTARO aprasymas
 //???? is kur tas cid - k.id AS cid- cia mes pervadinom savo k.id i cid
 //m.id AS id - irgi pervadinom (kazkodel neitraukem i ta sarasa medziai_id)
 //FROM table1 <- is lentels trees 
@@ -216,6 +213,7 @@ app.get('/trees-manager', (req, res) => {
 //ON table1.column_name = table2.column_name; <- nusakom taisykle pagal ka jas jungiam ON m.id = k.medziai_id (trees.id ir komentarai.medziai_id)
 ///m.id AS id, m.name, m.height, m.type, m.count, m.sum, k.con, k.id AS cid
 //m.id AS id, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.com, '-^o^-') AS comments, k.id AS cid !!! pas mane con o ne com
+//kodel rasom (k.con, '-^o^-') nes kitaip komentaru gale raso kableli ir tada viskas sugriuva(jis dabar tai ides i gala, Front/TreeLine.jsx nusiimsim ta kartinuka)
 app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
@@ -237,7 +235,7 @@ app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavi
 //  const sql = `
 //      SELECT
 //        *
-//        FROM medziai
+//        FROM trees
 //    `;
 //  con.query(sql, (err, result) => {
 //    if (err) throw err;
@@ -247,6 +245,9 @@ app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavi
 
 
 //+
+//b.apsirasom Fronts.jsx useEffect
+//b.jeigu all siunciam viena uzklausa o jeigu ne all siunciam kita uzklausa(req.params.cat != "all") kuri isfiltruoja ko butent norim ar leaf','spike','palm
+//SELECT column_name(s) <- cia isvardinam abieju lenteliu stulpelius
 app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta all iesko 'leaf','spike','palm' ir kazkuri is ju atidaro
     if (req.params.cat != "all") {
     const sql = `
@@ -394,7 +395,7 @@ app.post("/trees-vote/:id", (req, res) => {
     `;
   con.query(
     sql,
-    [Math.max(Math.min(req.body.vote, 10), 1), req.params.id],
+    [Math.max(Math.min(req.body.vote, 10), 1), req.params.id],//vote atejo is Front/TreeLine.jsx const [vote, setVote] = useState(5);
     (err, results) => {
       if (err) {
         throw err;
@@ -405,6 +406,7 @@ app.post("/trees-vote/:id", (req, res) => {
 });
 
 //40004 comentaras+
+//komentarai- tai antros lenteles pavadinimas is phpMyAdmin
 app.post("/trees-comment/:id", (req, res) => {
   const sql = `
     INSERT INTO komentarai
@@ -413,7 +415,7 @@ app.post("/trees-comment/:id", (req, res) => {
     `;
   con.query(
     sql,
-    [req.body.comment, req.params.id],
+    [req.body.comment, req.params.id],//comment atejo is Front/TreeLine.jsx const [comment, setComment] = useState('');
     (err, results) => {
       if (err) {
         throw err;

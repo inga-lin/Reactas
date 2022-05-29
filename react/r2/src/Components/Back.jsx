@@ -577,19 +577,19 @@ ir i Front/TreeLine.jsx apsirasomir persidavem is Front.jsx
 */
 
 /*
-2022-05-26 lengvesnis KOMENTARO aprasymas
+2022-05-26 lengvesnis 404 KOMENTARO aprasymas
 server/app.js, Front/TreeLine.jsx,src/Fronts.jsx  40004 ir 404 
 
 
-foto idejimas 505
-Create.jsx Front
-Front/Front/jsx 
+foto idejimas 505 //http://localhost:3000/admin matysim mygruka o atvaizduos frontineje dalyje
+Create.jsx  
 ir einam i savo duomenuu baze phpMyAdmin 
 sernas-> (viduryje) trees -> structure ->GO(pirma)
-Name: photo Type: LONGETEXT Default NULL -> SAVE
+Name: photo, Type: LONGETEXT, Default: NULL -> SAVE   (LONGETEXT kad tilptu visa nuotrauka kuri nus paversta i raides simbolius)(Default: NULL-jei nieko neirasysim(foto) nieko ir nerodys)
 (REDAGAVIMAS EILUTES CHANGE eit reik)
 atgal i vsc
-susikuriam src folderi Functions ir failiuka getBase64js
+susikuriam src folderi Functions ir failiuka getBase64.js- reikalingas kad nuotraukos atsidarytu
+ Creata.jsx apsirasom 
  i app.js idedam nuotrauka ir apsirasom jos dydi front.css
  ir galim paziureti ja http://localhost:3000/
 

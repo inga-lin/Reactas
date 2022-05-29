@@ -19,9 +19,9 @@
         &__comments {
             width: 100%;
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column-reverse;//40004padarom kad komentarai kristu i kita eilute//ir naijausi komentarai bus virsuje
             div {
-                margin: 10px;
+                margin: 10px;//404
             }
         }
         img {

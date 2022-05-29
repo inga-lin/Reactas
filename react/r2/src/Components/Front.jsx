@@ -15,25 +15,12 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
     const [search, setSearch] = useState('');//103 search
     const [lastUpdate, setLastUpdate] = useState(Date.now()); //302 nusikopinom is Back.jsx
 
-    //const [com, setCom] = useState([]); 
-    // Read ir 404
+    
+    // Read ir 404//b
     useEffect(() => {
         axios.get('http://localhost:3003/trees-list/' + show) //b.cia vietoje http://localhost:3003/trees-manager/ rasom http://localhost:3003/trees-list/ ir pridedam propsa show
             .then(res => {
                 console.log(res.data);
-                // const t = new Map(); //medziai
-                // const c = new Map(); //komentarai
-                // res.data.forEach(o => {
-                //     t.set(o.id, o);
-                //     if (null !== o.cid) {
-                //         c.set(o.cid, o);
-                //     }
-                // });
-                // const ar = [];
-                // t.forEach(o => ar.push(o));
-                // const ar2 = [];
-                // c.forEach(o => ar2.push(o));
-                // setCom(ar2);
                 dispachTrees(getDataFromServer(res.data));
             })
 }, [show, lastUpdate]);//302 lastUpdate //b ir cia irasom propsa show ir dabar reik eiti i backenda savo server/app.s ir ten apsirasyti sita useEfekta
@@ -63,9 +50,9 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
         });
     }
 
-    //40004
+    //40004 komentarai
     const saveComment = (id, value) => {
-        axios.post('http://localhost:3003/trees-comment/' + id, {comment: value})
+        axios.post('http://localhost:3003/trees-comment/' + id, {comment: value})//{comment: ... -objektas}
         .then(res => {
             setLastUpdate(Date.now());
         });
@@ -98,7 +85,7 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     <div className="col-12">
                         <ul className="list-group">
                             {
-                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} saveComment={saveComment}></TreeLine>) //300 302saveVote//40004
+                                trees.map(t => <TreeLine key={t.id} tree={t} saveVote={saveVote} saveComment={saveComment}></TreeLine>) //300 302saveVote//40004 saveComment
                             }
                         </ul>
                     </div>
@@ -152,8 +139,8 @@ function Front({ show }) { //b. pasiemam propsa is App.jsx
                     </div>
                     <div className="col-2">
                     <div className="form-group">
-                        <label>search</label>{/*103*/}
-                        <input type="text" className="form-control" onChange={doSearch} value={search} />
+                        <label>Search</label>{/*103*/}
+                        <input type="text" className="form-control" onChange={doSearch} value={search} placeholder="Search" />
                         <small className="form-text text-muted">Add new tree name here.</small>
                     </div>
                     </div>
