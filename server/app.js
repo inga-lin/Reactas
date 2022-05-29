@@ -432,28 +432,47 @@ app.post("/trees-comment/:id", (req, res) => {
 //ON table1.column_name = table2.column_name;
 
 
-//505+
+//buvo tik saugojimas be nuotraukos MODALO
+//app.put("/trees-manager/:id", (req, res) => {
+//const sql = `
+//UPDATE trees
+//SET name = ?, type = ?, height = ?
+//WHERE id = ?
+//`;
+//  con.query(
+//  sql,
+//  [req.body.title, req.body.type, req.body.height, req.params.id],
+//  (err, results) => {
+//    if (err) {
+//      throw err;
+ //   }
+ //   res.send(results);
+//  }
+//);
+//});
+
+//505+//600 apsirasom kaip plius serveryje istrinam foto
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
 // WHERE condition;
 app.put("/trees-manager/:id", (req, res) => {
-  let sql;
-  let args;
-    if('' === req.body.photo && req.body.del == 0) {
+  let sql;//606 siunciam foto
+  let args;//argsargumentai
+    if('' === req.body.photo && req.body.del == 0) {//jeigu tuscias stringas yra foto, tai nerodom nuotraukos rodom tik name  type height
       sql = `
         UPDATE trees
         SET name = ?, type = ?, height = ?
         WHERE id = ?
     `;
       args = [req.body.title, req.body.type, req.body.height, req.params.id];
-    } else if(1 == req.body.del) {
+    } else if(1 == req.body.del) {// jeigu yra 1 trinsim foto(photo bus null)
         sql = `
         UPDATE trees
         SET name = ?, type = ?, height = ?, photo = NULL
         WHERE id = ?
     `;
     args = [req.body.title, req.body.type, req.body.height, req.params.id];
-    } else {
+    } else { //kitu atveju rodysim nuotrauka
       sql = `
       UPDATE trees
       SET name = ?, type = ?, height = ?, photo = ?
@@ -473,7 +492,7 @@ app.put("/trees-manager/:id", (req, res) => {
   );
 });
 
-///cia sutvarkyt 606++
+///cia sutvarkyt 404 606?+
 app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
   const sql = `
      DELETE FROM komentarai

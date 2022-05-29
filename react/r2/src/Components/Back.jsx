@@ -596,6 +596,8 @@ susikuriam src folderi Functions ir failiuka getBase64.js- reikalingas kad nuotr
 ir apsirasom jos dydi front.css
  ir galim paziureti ja http://localhost:3000/
 
- MODALA reik sutvarkyti 600
+ 600 MODALA reik sutvarkyti- kad matytusi nuotraukos ir butu galima jasistrinti 
+ (Modalas.jsx labai panasus i Create.jsx)
  Modal.jsx pasitvarkom (nepamirst susiimportint import { useEffect, useState, useRef } from "react";import getBase64 from "../Functions/getBase64";)
+ server/app.js apsirasom
 */

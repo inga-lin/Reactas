@@ -8,7 +8,7 @@ const [title, setTitle] = useState('');
 const [height, setHeight] = useState('');
 const [type, setType] = useState('1');
 const [id, setId] = useState('0');
-const [remove, setRemove] = useState(false);
+const [remove, setRemove] = useState(false);//*600 istrinam nuotrauka jeigu uzdesim varnele//false kad butu varnele pradzioje neuzdets
 const fileInput = useRef();
 
 const buttonHandler = () => {
@@ -24,10 +24,10 @@ const buttonHandler = () => {
                     type,
                     id,
                     photo,
-                    del: remove ? 1 : 0
+                    del: remove ? 1 : 0//600 del(deletle) keiciam arba bus pazymetas arba nea deletle checkbox
                 });
                 setModalData(null);
-                setRemove(false);
+                setRemove(false);//600 istrinam nuotrauka jeigu uzdesim varnele
             });
     } else {//505
         setEditData({
@@ -35,11 +35,11 @@ const buttonHandler = () => {
             height,
             type,
             id,
-            photo: '',
-            del: remove ? 1 : 0
+            photo: '',//'' reiskia nuotraukos nera
+            del: remove ? 1 : 0//600 del(deletle) keiciam arba bus pazymetas arba nea deletle checkbox
         });
         setModalData(null);
-        setRemove(false);
+        setRemove(false);//*600 istrinam nuotrauka jeigu uzdesim varnele
     }
 }
 
@@ -116,18 +116,18 @@ const inputHandler = (e, which) => {
                                     <div className="col-12">
                                         <div className="form-group">{/*600 -cia padarom kad foto galima butu pakeisti ir su <input type="checkbox" pazymejus ji istrina photo*/}
                                             <label>Photo</label>
-                                            <input ref={fileInput} type="file" className="form-control" />
+                                            <input ref={fileInput} type="file" className="form-control" />{/*505 cia butinai dadeti ref={fileInput}-(ateina su getBase64 atsiradimu) o type="file"- su input laukelio kurimu, kad buutonas failo pasirinkimui atsirastu*/}
                                             <small className="form-text text-muted">Tree photo.</small>
                                         </div>
                                     </div>
                                     <div className="col-2">
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" onChange={() => setRemove(r => !r)}  checked={remove} />
-                                                <label class="form-check-label">Delete Photo</label>
+                                            <input type="checkbox" className="form-check-input" onChange={() => setRemove(r => !r)}  checked={remove} />{/*600 istrinam nuotrauka jeigu uzdesim varnele*/}
+                                            <label class="form-check-label">Delete Photo</label>
                                         </div>
                                     </div>
                                     <div className="col-10">
-                                        {modalData.photo ? <img alt="foto" className="photo" src={modalData.photo}></img> : null}
+                                        {modalData.photo ? <img alt="foto" className="photo" src={modalData.photo}></img> : null}{/*600 jei nuotrauka bus pasirinkta ja rodys jeigu nebus nerodys*/}
                                     </div>
 
                                 </div>
