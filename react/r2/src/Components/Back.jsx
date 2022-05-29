@@ -6,7 +6,7 @@ import '../back.scss';
 import Create from './Create';
 import TreeLine from './TreeLine';
 import Modal from './Modal';
-import CreateSize from './CreateSize'; //606
+import CreateSize from './CreateSize'; //808
 import SizeList from './SizeList';
 // cia Tree List lentele
 
@@ -23,7 +23,7 @@ function Back() {
 
   const [lastUpdate, setLastUpdate] = useState(Date.now()); //liks useState//7.cia bus data kada pirma karta reactas uzsikrauna puslapi
 
-  const [createSizeData, setCreateSizeData] = useState(null);
+  const [createSizeData, setCreateSizeData] = useState(null);//800
   const [sizes, setSizes] = useState([]);
   // Read 
   useEffect(() => {
@@ -92,7 +92,7 @@ function Back() {
         })
 }, [lastUpdate]);
 
-
+//800
 useEffect(() => {
   if (null === createSizeData) {
     return;
@@ -110,7 +110,7 @@ useEffect(() => {
       <div className="row">
         <div className="col-4">
           <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
-          <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>
+          <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>{/*800*/}
           <SizeList sizes={sizes}></SizeList>
         </div>
         <div className="col-8">
@@ -628,5 +628,7 @@ trees-> structure -> Relation view
 ON DELETLE: SET NULL, ON UPDATE: RESTRICT, COLUMN : dydziai_id, Table: dydziai, Column: id
 SAVE
 Tada einam ant sernas -> Designer turim matyti jau tris sujungtas lenteles
-
+susikuriam Components CreateSize.jsx faila
+ir ji idedam i Back.jsx
+app.js app.post("/trees-size", (req, res) => {
 */
