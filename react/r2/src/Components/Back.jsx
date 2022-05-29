@@ -590,8 +590,12 @@ Name: photo, Type: LONGETEXT, Default: NULL -> SAVE   (LONGETEXT kad tilptu visa
 atgal i vsc
 susikuriam src folderi Functions ir failiuka getBase64.js- reikalingas kad nuotraukos atsidarytu
  Creata.jsx apsirasom 
- i app.js idedam nuotrauka ir apsirasom jos dydi front.css
+ i app.js prie (app.post('/trees-manager', (req, res) => {) idedam photo ir ?,req.body.photo
+  ir prie app.get("/trees-list/all", (req, res) => { prirasom m.photo,
+ Front/TreeLines.jsx atvaizduosim photo
+ir apsirasom jos dydi front.css
  ir galim paziureti ja http://localhost:3000/
 
  MODALA reik sutvarkyti 600
+ Modal.jsx pasitvarkom (nepamirst susiimportint import { useEffect, useState, useRef } from "react";import getBase64 from "../Functions/getBase64";)
 */

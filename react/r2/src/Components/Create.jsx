@@ -102,7 +102,7 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
                         <div className="col-12">
                             <div className="form-group">{/*505 per cia idesim nuotraukas*/}
                                 <label>Photo</label>
-                                <input ref={fileInput} type="file" className="form-control" />
+                                <input ref={fileInput} type="file" className="form-control" />{/*505 cia butinai dadeti ref={fileInput}-(ateina su getBase64 atsiradimu) o type="file"- su input laukelio kurimu, kad buutonas failo pasirinkimui atsirastu*/}
                                 <small className="form-text text-muted">Tree photo.</small>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ const buttonHandler = () => {
     const file = fileInput.current.files[0];
 
     if (file) {
-        getBase64(file)
+        getBase64(file)//505
             .then(photo => {
                 console.log(photo);
                 setEditData({
@@ -29,7 +29,7 @@ const buttonHandler = () => {
                 setModalData(null);
                 setRemove(false);
             });
-    } else {
+    } else {//505
         setEditData({
             title,
             height,
@@ -114,7 +114,7 @@ const inputHandler = (e, which) => {
                                         </div>
                                     </div>
                                     <div className="col-12">
-                                        <div className="form-group">
+                                        <div className="form-group">{/*600 -cia padarom kad foto galima butu pakeisti ir su <input type="checkbox" pazymejus ji istrina photo*/}
                                             <label>Photo</label>
                                             <input ref={fileInput} type="file" className="form-control" />
                                             <small className="form-text text-muted">Tree photo.</small>

@@ -205,7 +205,7 @@ app.get('/trees-manager', (req, res) => {
 
 
 
-/////////////////////////////////// 404//+KOMENTARO aprasymas
+/////////////////////////////////// 404//+KOMENTARO aprasymas//505 ir cia isidedam m.photo,
 //???? is kur tas cid - k.id AS cid- cia mes pervadinom savo k.id i cid
 //m.id AS id - irgi pervadinom (kazkodel neitraukem i ta sarasa medziai_id)
 //FROM table1 <- is lentels trees 
@@ -265,7 +265,7 @@ app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta 
 
 //////////////////////////
 
-//5)kaip iraso nauja info i duomenu baze//505+
+//5)kaip iraso nauja info i duomenu baze//505 pridedam photo ir ?, req.body.photo
 app.post('/trees-manager', (req, res) => {
     // INSERT INTO table_name (column1, column2, column3, ...)
     // VALUES (value1, value2, value3, ...);
