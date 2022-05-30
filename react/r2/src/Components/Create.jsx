@@ -9,7 +9,7 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
     const [height, setHeight] = useState('');//(Tree height)
     const [type, setType] = useState('1');//(Tree type ir kadangi jis uzstatytas su pasirinkimu tai parasom '1')
     
-    const [size, setSize] = useState('0');
+    const [size, setSize] = useState('0');//801 size list lentele
     const fileInput = useRef(); //505
 
     const buttonHandler = () => {

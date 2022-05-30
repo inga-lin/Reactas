@@ -24,7 +24,7 @@ function Back() {
   const [lastUpdate, setLastUpdate] = useState(Date.now()); //liks useState//7.cia bus data kada pirma karta reactas uzsikrauna puslapi
 
   const [createSizeData, setCreateSizeData] = useState(null);//800
-  const [sizes, setSizes] = useState([]);
+  const [sizes, setSizes] = useState([]);//800-801
   // Read 
   useEffect(() => {
     axios.get('http://localhost:3003/trees-manager')
@@ -84,7 +84,7 @@ function Back() {
   }
 
 
-  useEffect(() => {
+  useEffect(() => {//800 size list lentele
     axios.get('http://localhost:3003/trees-sizes')
         .then(res => {
             console.log(res.data);
@@ -92,7 +92,7 @@ function Back() {
         })
 }, [lastUpdate]);
 
-//800
+//801 size list lentele
 useEffect(() => {
   if (null === createSizeData) {
     return;
@@ -111,7 +111,7 @@ useEffect(() => {
         <div className="col-4">
           <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
           <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>{/*800*/}
-          <SizeList sizes={sizes}></SizeList>
+          <SizeList sizes={sizes}></SizeList>{/*801*/}
         </div>
         <div className="col-8">
           <div className="card m-2">
@@ -629,6 +629,15 @@ ON DELETLE: SET NULL, ON UPDATE: RESTRICT, COLUMN : dydziai_id, Table: dydziai, 
 SAVE
 Tada einam ant sernas -> Designer turim matyti jau tris sujungtas lenteles
 susikuriam Components CreateSize.jsx faila
-ir ji idedam i Back.jsx
-app.js app.post("/trees-size", (req, res) => {
+ir ji idedam i Back.jsx ir ten apsirasom
+app.js app.post("/trees-size", (req, res) => { ir
+  app.get("/trees-sizes", (req, res) => {
+
+801 sukursim Size List lentele, kuri atvaizduos sukurta siza is lanteles Add New Size
+apsirasom Back.jsx
+Componentuose susikuriam SizeList.jsx
+ir isikeliam <SizeList> i Back.jsx
+*/
+
+/* 2022-05-30
 */

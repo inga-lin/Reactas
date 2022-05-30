@@ -509,7 +509,7 @@ app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnt
 
 
 
-//800+
+////801 800 size list lentele
 //medziu dyddziai
 app.get("/trees-sizes", (req, res) => {
   const sql = `
@@ -527,7 +527,8 @@ res.send(result);
 //800+
 //turi irasineti i duomenu baze size
 app.post("/trees-size", (req, res) => {
-  // INSERT INTO table_name (column1, column2, column3, ...)
+  // INSERT INTO dydziai-lenteles pavadinimas
+  //(size)-eilutes pavadinimas
   // VALUES (value1, value2, value3, ...);
   const sql = `
         INSERT INTO dydziai
