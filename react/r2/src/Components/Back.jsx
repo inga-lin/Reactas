@@ -8,6 +8,8 @@ import TreeLine from './TreeLine';
 import Modal from './Modal';
 import CreateSize from './CreateSize'; //808
 import SizeList from './SizeList';
+import { Link } from 'react-router-dom';
+import { authConfig } from '../Functions/auth';
 // cia Tree List lentele
 
 function Back() {
@@ -25,9 +27,9 @@ function Back() {
 
   const [createSizeData, setCreateSizeData] = useState(null);//800
   const [sizes, setSizes] = useState([]);//800-801
-  // Read 
+  // Read //buvo axios.get('http://localhost:3003/trees-manager')
   useEffect(() => {
-    axios.get('http://localhost:3003/trees-manager')
+    axios.get('http://localhost:3003/admin/trees-manager', authConfig())
       .then(res => {
         console.log(res.data);
         setTrees(res.data);//padarom kad per cia pasiimam savo trees is serverio
@@ -109,6 +111,7 @@ useEffect(() => {
     <div className="container">
       <div className="row">
         <div className="col-4">
+          <Link to="/logout">Log OUT</Link>
           <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
           <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>{/*800*/}
           <SizeList sizes={sizes}></SizeList>{/*801*/}
@@ -640,4 +643,11 @@ ir isikeliam <SizeList> i Back.jsx
 */
 
 /* 2022-05-30
+//900 reikalingas admino paskyrai su slaptazodziu
+Administratoriaus prisijungimas prie back puses
+reikes src/App.js rirasyti,
+susikurti Componentuose LoginPage.jsx, LogoutPage.jsx, RequireAuth.jsx
+Fubctions foldeeryje susikurti auth.js
+pasitvarkyti Back.jsx
+server/app.js
 */

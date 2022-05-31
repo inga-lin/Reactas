@@ -182,7 +182,8 @@ app.get("/", (req, res) => {
 //});
 
 ///////////////////////700 atvaizduos bekende comentus+
-app.get('/trees-manager', (req, res) => {
+//buvo app.get('/trees-manager', (req, res) => {
+app.get('/admin/trees-manager', (req, res) => {
   // SELECT column1, column2, ...
   // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
   //AS cid - yra komentaro id
