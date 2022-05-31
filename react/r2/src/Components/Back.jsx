@@ -9,7 +9,7 @@ import Modal from './Modal';
 import CreateSize from './CreateSize'; //808
 import SizeList from './SizeList';
 import { Link } from 'react-router-dom';
-import { authConfig } from '../Functions/auth';
+import { authConfig } from '../Functions/auth';//900 reikalingas admino paskyrai su slaptazodziu
 // cia Tree List lentele
 
 function Back() {
@@ -27,9 +27,9 @@ function Back() {
 
   const [createSizeData, setCreateSizeData] = useState(null);//800
   const [sizes, setSizes] = useState([]);//800-801
-  // Read //buvo axios.get('http://localhost:3003/trees-manager')
+  // Read //buvo be admino slaptazodzio axios.get('http://localhost:3003/trees-manager') //900su admino slaptazodziu axios.get('http://localhost:3003/admin/trees-manager', authConfig())
   useEffect(() => {
-    axios.get('http://localhost:3003/admin/trees-manager', authConfig())
+    axios.get('http://localhost:3003/admin/trees-manager', authConfig())//900 reikalingas admino paskyrai su slaptazodziu
       .then(res => {
         console.log(res.data);
         setTrees(res.data);//padarom kad per cia pasiimam savo trees is serverio
@@ -649,5 +649,8 @@ reikes src/App.js rirasyti,
 susikurti Componentuose LoginPage.jsx, LogoutPage.jsx, RequireAuth.jsx
 Fubctions foldeeryje susikurti auth.js
 pasitvarkyti Back.jsx
-server/app.js
+server/app.js prirasyti ir susiinstaluoti:
+npm install js-md5
+npm install uuid
+
 */

@@ -139,6 +139,8 @@ const port = 3003;
 const cors = require("cors");
 app.use(cors());
 const mysql = require("mysql");
+md5 = require('js-md5');
+const uuid = require('uuid');
 
 app.use(express.json({limit: '50mb'}));//505 per cia bus galima didele foto ideti
 app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
