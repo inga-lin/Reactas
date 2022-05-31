@@ -8,7 +8,7 @@ import TreeLine from './TreeLine';
 import Modal from './Modal';
 import CreateSize from './CreateSize'; //808
 import SizeList from './SizeList';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';//900
 import { authConfig } from '../Functions/auth';//900 reikalingas admino paskyrai su slaptazodziu
 // cia Tree List lentele
 
@@ -87,7 +87,7 @@ function Back() {
 
 
   useEffect(() => {//800 size list lentele
-    axios.get('http://localhost:3003/trees-sizes')
+    axios.get('http://localhost:3003/admin/trees-sizes', authConfig()) //900 pasidejau cia admin ir authConfig()
         .then(res => {
             console.log(res.data);
             setSizes(res.data);
@@ -108,10 +108,16 @@ useEffect(() => {
 
   return (
     <>
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <Link to="/logout">Log OUT</Link>{/*900*/}
+          </div>
+        </div>
+      </div>
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <Link to="/logout">Log OUT</Link>
           <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
           <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>{/*800*/}
           <SizeList sizes={sizes}></SizeList>{/*801*/}
@@ -645,12 +651,37 @@ ir isikeliam <SizeList> i Back.jsx
 /* 2022-05-30
 //900 reikalingas admino paskyrai su slaptazodziu
 Administratoriaus prisijungimas prie back puses
-reikes src/App.js rirasyti,
+phpMyAdmine reik atsisiusti arba prie serno patiems susikurti user lentele(ji nebus sujungta kaip anos)
+
+Name      type         Length       Default    Collation         Null    Adjust privileges      A_I
+id        INT          11           none                                         x                x
+name      VARCHAR      50           None     utf8mb4_general                     x
+pass      CHAR         32           None     utf8mb4_general                     x
+session    CHAR        36           NULL     utf8mb4_general       x             x
+SAVE
+
+//https://www.md5hashgenerator.com/ slaptazodzio pavertimas i koda
+ARBA susiimportint failiuka 
+phpMyAdmine
+einam ant sernas
+import -> Choose File(mygtukas) -> atsisiunciu is autorizacijos/auth/auth -> open -> GO
+spaudziam ant sukurtos user lenteles: susikuriam nauja (jeigu norim)vartotoja su id, name, pass ir session:
+Insert -> 
+Colums   Function       Value
+name                    bebras
+pass      MD5           333        <- su tuo MD5 musu passvorda pakeis i uzkuoduota koda
+(sesion - nereikia, ja sugeneruos prisijungimo metu)
+GO
+
+einam i VSC
+Fubctions folderyje susikurti auth.js
+reikes src/App.js prirasyti,
 susikurti Componentuose LoginPage.jsx, LogoutPage.jsx, RequireAuth.jsx
-Fubctions foldeeryje susikurti auth.js
 pasitvarkyti Back.jsx
 server/app.js prirasyti ir susiinstaluoti:
 npm install js-md5
-npm install uuid
-
+npm install uuid   arba npm i uuid
+npm start
+galim pasitikrint http://localhost:3003/admin/hello bus tuscias {}
+http://localhost:3000/admin ir tad mus numeta i http://localhost:3000/login ir ten prisiloginam bebras    123 ir atsidarys http://localhost:3000/admin/ visas back puses puslapis
 */

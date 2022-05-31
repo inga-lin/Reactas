@@ -139,8 +139,8 @@ const port = 3003;
 const cors = require("cors");
 app.use(cors());
 const mysql = require("mysql");
-md5 = require('js-md5');
-const uuid = require('uuid');
+md5 = require('js-md5');//900 md5 ikriep projektam nenaudoti nes nesaugus slaptazodziu generaorius
+const uuid = require('uuid');//900 sesijos rakto generatorius(random belenkoks kodas)
 
 app.use(express.json({limit: '50mb'}));//505 per cia bus galima didele foto ideti
 app.use(express.urlencoded({limit: '50mb'}));//505 per cia bus galima didele foto ideti
@@ -157,8 +157,82 @@ const con = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'sernas',
-    });
+});
 
+
+/////900 apsirasom ko reik administratorio prisijungimui------>
+//https://www.md5hashgenerator.com/ slaptazodzio pavertimas i koda
+//jeigu yra /admin' tada tikrinam ['authorization'] (prisijungima jeigu nera /admin tai atidarom paprastai vartotojui)
+const doAuth = function(req, res, next) {
+  if (0 === req.url.indexOf('/admin')) {
+      const sql = `
+      SELECT
+      name
+      FROM users
+      WHERE session = ?
+  `;
+      con.query(
+          sql, [req.headers['authorization'] || ''],
+          (err, results) => {
+              if (err) throw err;
+              if (!results.length) {
+                  res.status(401).send({});
+                  req.connection.destroy();
+              } else {
+                  next();
+              }
+          }
+      );
+  } else {
+      next();
+  }
+}
+app.use(doAuth)
+
+
+
+
+app.get("/admin/hello", (req, res) => {
+  res.send("Hello Admin!");
+});
+
+app.get("/login-check", (req, res) => {
+  const sql = `
+  SELECT
+  name
+  FROM users
+  WHERE session = ?
+  `;
+  con.query(sql, [req.headers['authorization'] || ''], (err, result) => {
+      if (err) throw err;
+      if (!result.length) {
+          res.send({ msg: 'error' });
+      } else {
+          res.send({ msg: 'ok' });
+      }
+  });
+});
+
+        //jeigu suvedant slaprazodi su name sutampa tai mums uzkraus puslapi(res.send({ msg: 'ok', key });) jei ne, neatidarysres.send({ msg: 'error', key: '' });
+        //musu vedamas slaprazodis tikrinamas su musu serveryje uzkuoduotu kodu is https://www.md5hashgenerator.com/
+         // md5(req.body.pass) sitoje vietoje uzkuoduoja musu paprasta slaptazodi
+app.post("/login", (req, res) => {
+  const key = uuid.v4();
+  const sql = `
+  UPDATE users
+  SET session = ?
+  WHERE name = ? AND pass = ?
+`;
+  con.query(sql, [key, req.body.user, md5(req.body.pass)], (err, result) => {
+      if (err) throw err;
+      if (!result.affectedRows) {
+          res.send({ msg: 'error', key: '' });
+      } else {
+          res.send({ msg: 'ok', key });
+      }
+  });
+});
+/////////900 administratoriaus prisijungimo pabaiga-------------------->
 
 //Route+
 //jis nurodo kokius puslapus paleidzia routas http://localhost:3003/ http://localhost:3003/trees-manager
@@ -184,8 +258,9 @@ app.get("/", (req, res) => {
 //});
 
 ///////////////////////700 atvaizduos bekende comentus+
-//buvo app.get('/trees-manager', (req, res) => {
-app.get('/admin/trees-manager', (req, res) => {
+//buvo be administratoriaus prisijungimo app.get('/trees-manager', (req, res) => {
+//900 su administratoriaus prisijungimu app.get('/admin/trees-manager', (req, res) => {
+app.get('/admin/trees-manager', (req, res) => {//900
   // SELECT column1, column2, ...
   // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
   //AS cid - yra komentaro id
@@ -514,7 +589,7 @@ app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnt
 
 ////801 800 size list lentele
 //medziu dyddziai
-app.get("/trees-sizes", (req, res) => {
+app.get("/admin/trees-sizes", (req, res) => {//900 pasidejau cia admin
   const sql = `
   SELECT
   *

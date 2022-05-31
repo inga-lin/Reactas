@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import axios from 'axios';
 import { authConfig } from '../Functions/auth';
 //900 reikalingas admino paskyrai su slaptazodziu
+
+//children  yra paimtas is  <Route path="/admin"element={<RequireAuth><Back/></RequireAuth>}/></Routes> ir children yra <Back/>
 function RequireAuth({ children }) {
     const [view, setView] = useState(<h2>Please wait...</h2>);
   

@@ -1,8 +1,8 @@
 import Back from "./Components/Back";
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Front from "./Components/Front";
-import LoginPage from "./Components/LoginPage";
-import LogoutPage from "./Components/LogoutPage";
+import LoginPage from "./Components/LoginPage";//900 reikalingas admino paskyrai su slaptazodziu
+import LogoutPage from "./Components/LogoutPage";//900 reikalingas admino paskyrai su slaptazodziu
 import RequireAuth from "./Components/RequireAuth";//900 reikalingas admino paskyrai su slaptazodziu
 function App() {
 
@@ -15,6 +15,7 @@ function App() {
         <Route path="leaf" element={<Front show="leaf"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
         <Route path="spike" element={<Front show="spike"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
         <Route path="palm" element={<Front show="palm"/>} /> {/*b.show yra propsas kuri perduodam i Front.jsx*/}
+        {/*900 buvo be admino prisijungimo <Route path="admin" element={<Back/>} /></Route> ir pakeitem i <Route path="/admin"element={<RequireAuth><Back/></RequireAuth>}/>*/}
         {/*//900 reikalingas admino paskyrai su slaptazodziu*/}
         <Route
               path="/admin"
