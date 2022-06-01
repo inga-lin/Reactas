@@ -702,3 +702,8 @@ npm start
 galim pasitikrint http://localhost:3003/admin/hello bus tuscias {}
 http://localhost:3000/admin ir tad mus numeta i http://localhost:3000/login ir ten prisiloginam bebras    123 ir atsidarys http://localhost:3000/admin/ visas back puses puslapis
 */
+
+/*2022.06.01
+KAIP EKSPORTUOT DUOMENU BAZE
+sernas -> Ezport -> GO ir donwlode ji susirandam ir isimetam i savo gito folderi kuriame dirbam
+*/
