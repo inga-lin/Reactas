@@ -266,8 +266,8 @@ app.get('/admin/trees-manager', (req, res) => {//900//1000 dadejau dj.size,  LEF
   //AS cid - yra komentaro id
   const sql = `
   SELECT
-  m.id AS id, m.photo, m.name,dj.size, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
-  FROM trees AS m
+  m.id AS id, m.photo, m.name,dj.size, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.com, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
+  FROM medziai AS m
   LEFT JOIN komentarai AS k
   ON m.id = k.medziai_id
   LEFT JOIN dydziai as dj
@@ -298,8 +298,8 @@ app.get('/admin/trees-manager', (req, res) => {//900//1000 dadejau dj.size,  LEF
 app.get("/trees-list/all", (req, res) => {//all atskiras routas visu medziu gavimui
         const sql = `
         SELECT
-        m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments, k.id AS cid 
-        FROM trees AS m
+        m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.com, '-^o^-') AS comments, k.id AS cid 
+        FROM medziai AS m
         LEFT JOIN komentarai AS k
         ON m.id = k.medziai_id
         GROUP BY m.id
@@ -334,7 +334,7 @@ app.get("/trees-list/:cat", (req, res) => { //cat yra parametras jeigu tai neta 
     const sql = `
             SELECT
             *
-            FROM trees
+            FROM medziai
             WHERE type = ?
         `;
     con.query(sql, [['leaf','spike','palm'].indexOf(req.params.cat) + 1], (err, result) => { //b.mes gaunam zodzius ir juos paverciam i indeksa
@@ -355,7 +355,7 @@ app.post('/trees-manager', (req, res) => {
     //VALUES (?, ?, ?) -paruosiam vieta deti duomenim
     //1000 dydziai_id ir ?
     const sql = `
-        INSERT INTO trees
+        INSERT INTO medziai
         (name, height, type, photo, dydziai_id)
         VALUES (?, ?, ?, ?, ?)
     `;
@@ -380,7 +380,7 @@ app.post('/trees-manager', (req, res) => {
 // WHERE some_column = some_value
 app.delete('/trees-manager/:id', (req, res) => { //delytinam is trees lnteles kurio id yra ?(kazkoks)
     const sql = `
-        DELETE FROM trees
+        DELETE FROM medziai
         WHERE id = ?
         `;
     con.query(sql, [req.params.id], (err, result) => { //[req.params.id] yra = '/trees-manager/:id'
@@ -426,16 +426,16 @@ app.get("/trees-list-sorted/", (req, res) => {
   let sql;
 
   if (req.query.by == 'title' && req.query.dir == 'asc'){
-    sql = `SELECT * FROM trees ORDER BY name ASC`;
+    sql = `SELECT * FROM medziai ORDER BY name ASC`;
   }
   else if (req.query.by == 'title' && req.query.dir == 'desc'){
-    sql = `SELECT * FROM trees ORDER BY name DESC`;
+    sql = `SELECT * FROM medziai ORDER BY name DESC`;
   }
   else if (req.query.by == 'height' && req.query.dir == 'asc'){
-    sql = `SELECT * FROM trees ORDER BY height ASC`;
+    sql = `SELECT * FROM medziai ORDER BY height ASC`;
   }
   else{
-    sql = `SELECT * FROM trees ORDER BY height DESC`;
+    sql = `SELECT * FROM medziai ORDER BY height DESC`;
   }
   con.query(
     sql,
@@ -456,7 +456,7 @@ app.get("/trees-list-search", (req, res) => {
   const sql = `
         SELECT
         *
-        FROM trees
+        FROM medziai
         WHERE name LIKE '%${req.query.s}%'
     `;
   con.query(sql, (err, result) => {
@@ -472,7 +472,7 @@ app.get("/trees-list-search", (req, res) => {
 //300 302 vote +
 app.post("/trees-vote/:id", (req, res) => {
   const sql = `
-        UPDATE trees
+        UPDATE medziai
         SET count = count + 1, sum = sum + ?
         WHERE id = ?
     `;
@@ -544,21 +544,21 @@ app.put("/trees-manager/:id", (req, res) => {
   let args;//argsargumentai
     if('' === req.body.photo && req.body.del == 0) {//jeigu tuscias stringas yra foto, tai nerodom nuotraukos rodom tik name  type height
       sql = `
-        UPDATE trees
+        UPDATE medziai
         SET name = ?, type = ?, height = ?, dydziai_id = ?
         WHERE id = ?
     `;
       args = [req.body.title, req.body.type, req.body.height,req.body.size, req.params.id];
     } else if(1 == req.body.del) {// jeigu yra 1 trinsim foto(photo bus null)
         sql = `
-        UPDATE trees
+        UPDATE medziai
         SET name = ?, type = ?, height = ?, photo = NULL
         WHERE id = ?
     `;
     args = [req.body.title, req.body.type, req.body.height, req.params.id];
     } else { //kitu atveju rodysim nuotrauka
       sql = `
-      UPDATE trees
+      UPDATE medziai
       SET name = ?, type = ?, height = ?, photo = ?
       WHERE id = ?
   `;
