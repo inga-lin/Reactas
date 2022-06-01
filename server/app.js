@@ -493,7 +493,7 @@ app.post("/trees-vote/:id", (req, res) => {
 app.post("/trees-comment/:id", (req, res) => {
   const sql = `
     INSERT INTO komentarai
-    (con, medziai_id)
+    (com, medziai_id)
     VALUES (?, ?)
     `;
   con.query(
