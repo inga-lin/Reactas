@@ -27,6 +27,8 @@ function Back() {
 
   const [createSizeData, setCreateSizeData] = useState(null);//800
   const [sizes, setSizes] = useState([]);//800-801
+
+  //const [deleteIdSize, setDeleteIdSize] = useState(null);//1000
   // Read //buvo be admino slaptazodzio axios.get('http://localhost:3003/trees-manager') //900su admino slaptazodziu axios.get('http://localhost:3003/admin/trees-manager', authConfig())
   useEffect(() => {
     axios.get('http://localhost:3003/admin/trees-manager', authConfig())//900 reikalingas admino paskyrai su slaptazodziu

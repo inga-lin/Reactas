@@ -589,7 +589,7 @@ app.delete("/trees-delete-comment/:id", (req, res) => { //delytinam is trees lnt
 
 ////801 800 size list lentele
 //medziu dyddziai
-app.get("/admin/trees-sizes", (req, res) => {//900 pasidejau cia admin
+app.get("/admin/trees-sizes", (req, res) => {///900 pasidejau cia admin
   const sql = `
   SELECT
   *
