@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import getBase64 from "../Functions/getBase64";
-function Modal({ setModalData, modalData, setEditData }) {
+function Modal({ setModalData, modalData, setEditData,sizes }) {//sizes 1000
 //modalData visas medis ant modalo
 //9. is Create.jsx nusikopinam dali kodo
 //Edit tree
@@ -9,6 +9,7 @@ const [height, setHeight] = useState('');
 const [type, setType] = useState('1');
 const [id, setId] = useState('0');
 const [remove, setRemove] = useState(false);//*600 istrinam nuotrauka jeigu uzdesim varnele//false kad butu varnele pradzioje neuzdets
+const [size, setSize] = useState('0');//1000
 const fileInput = useRef();
 
 const buttonHandler = () => {
@@ -23,6 +24,7 @@ const buttonHandler = () => {
                     height,
                     type,
                     id,
+                    size,//1000
                     photo,
                     del: remove ? 1 : 0//600 del(deletle) keiciam arba bus pazymetas arba nea deletle checkbox
                 });
@@ -35,6 +37,7 @@ const buttonHandler = () => {
             height,
             type,
             id,
+            size,//1000
             photo: '',//'' reiskia nuotraukos nera
             del: remove ? 1 : 0//600 del(deletle) keiciam arba bus pazymetas arba nea deletle checkbox
         });
@@ -54,6 +57,9 @@ const inputHandler = (e, which) => {
         case 'type':
             setType(e.target.value);
             break;
+        case 'size'://1000
+             setSize(e.target.value);
+            break;  
         default:
     }
 }
@@ -68,6 +74,7 @@ const inputHandler = (e, which) => {
             setTitle(modalData.name);
             setHeight(modalData.height);
             setType(modalData.type);
+            setSize(modalData.size);//1000
             setId(modalData.id);//11
         }
     }, [modalData])
@@ -109,6 +116,17 @@ const inputHandler = (e, which) => {
                                                 <option value="1">Leaf</option>
                                                 <option value="2">Spike</option>
                                                 <option value="3">Palm</option>
+                                            </select>
+                                            <small className="form-text text-muted">Tree type.</small>
+                                        </div>
+                                    </div>
+                                    <div className="col-8">{/*1000*/}
+                                        <div className="form-group">
+                                            <label>Tree Sizes</label>
+                                            <select className="form-control" onChange={e => inputHandler(e, 'size')} value={size}>
+                                                {
+                                                    sizes.map(s => <option key={s.id} value={s.id}>{s.size}</option>)
+                                                }
                                             </select>
                                             <small className="form-text text-muted">Tree type.</small>
                                         </div>

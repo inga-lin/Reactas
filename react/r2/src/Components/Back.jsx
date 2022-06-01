@@ -28,7 +28,7 @@ function Back() {
   const [createSizeData, setCreateSizeData] = useState(null);//800
   const [sizes, setSizes] = useState([]);//800-801
 
-  //const [deleteIdSize, setDeleteIdSize] = useState(null);//1000
+  const [deleteSizeId, setDeleteSizeId] = useState(null);//1000
   // Read //buvo be admino slaptazodzio axios.get('http://localhost:3003/trees-manager') //900su admino slaptazodziu axios.get('http://localhost:3003/admin/trees-manager', authConfig())
   useEffect(() => {
     axios.get('http://localhost:3003/admin/trees-manager', authConfig())//900 reikalingas admino paskyrai su slaptazodziu
@@ -108,6 +108,19 @@ useEffect(() => {
   });
 },[createSizeData]);
 
+    //Delete SIZE 1000
+    useEffect(() => {
+      if (null === deleteSizeId) {
+        return;
+      }
+      axios.delete('http://localhost:3003/trees-manager-sizes/' + deleteSizeId.id,)
+        .then(res => {
+          console.log(res);
+          setLastUpdate(Date.now());
+        });
+
+    }, [deleteSizeId])
+
   return (
     <>
       <div className="container">
@@ -122,7 +135,8 @@ useEffect(() => {
         <div className="col-4">
           <Create sizes={sizes} setCreateData={setCreateData} lastUpdate={lastUpdate}></Create> {/*3 perduodam setCreateData i Create.jsx*/}
           <CreateSize setCreateSizeData={setCreateSizeData}></CreateSize>{/*800*/}
-          <SizeList sizes={sizes}></SizeList>{/*801*/}
+          {/*<SizeList sizes={sizes}></SizeList> buvo be 1000toks{/*801*/}
+          <SizeList sizes={sizes} setDeleteSizeId={setDeleteSizeId}></SizeList>{/*1000*/}
         </div>
         <div className="col-8">
           <div className="card m-2">
@@ -140,7 +154,8 @@ useEffect(() => {
         </div>
       </div>
     </div>
-    <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
+   {/* buvo toks be 1000 <Modal setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*9.jis setModalData ir dar ziuri ka pasetinam modalData(pasirodo kai turim ka parodyti) */}
+   <Modal  sizes={sizes} setEditData={setEditData} setModalData={setModalData} modalData={modalData}></Modal>{/*1000*/}
     </>
   );
 }

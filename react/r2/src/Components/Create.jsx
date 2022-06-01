@@ -31,7 +31,8 @@ function Create({ setCreateData, sizes }) { //{/*3pasiimam per cia savo setCreat
                 title,
                 height,
                 type,
-                photo: null//505
+                photo: null,//505
+                size //1000
             });
         }
         setTitle('');

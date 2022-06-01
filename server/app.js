@@ -260,16 +260,18 @@ app.get("/", (req, res) => {
 ///////////////////////700 atvaizduos bekende comentus+
 //buvo be administratoriaus prisijungimo app.get('/trees-manager', (req, res) => {
 //900 su administratoriaus prisijungimu app.get('/admin/trees-manager', (req, res) => {
-app.get('/admin/trees-manager', (req, res) => {//900
+app.get('/admin/trees-manager', (req, res) => {//900//1000 dadejau dj.size,  LEFT JOIN dydziai as dj ON m.dydziai_id = dj.id
   // SELECT column1, column2, ...
   // FROM table_name; FROM (trees- duomenu bazes pavadinimas)
   //AS cid - yra komentaro id
   const sql = `
   SELECT
-  m.id AS id, m.photo, m.name, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
+  m.id AS id, m.photo, m.name,dj.size, m.height, m.type, m.count, m.sum, GROUP_CONCAT(k.con, '-^o^-') AS comments,GROUP_CONCAT(k.id) AS cid 
   FROM trees AS m
   LEFT JOIN komentarai AS k
   ON m.id = k.medziai_id
+  LEFT JOIN dydziai as dj
+  ON m.dydziai_id = dj.id
   GROUP BY m.id
 `;
   con.query(sql, function(err, result) {
@@ -351,17 +353,19 @@ app.post('/trees-manager', (req, res) => {
     //(INSERT INTO trees-musu duomenu bazes pavadinimas)
     //(name, height, type)- musu duomenu bazes lenteles stulpeliu pavadinimai
     //VALUES (?, ?, ?) -paruosiam vieta deti duomenim
+    //1000 dydziai_id ir ?
     const sql = `
         INSERT INTO trees
-        (name, height, type, photo)
-        VALUES (?, ?, ?, ?)
+        (name, height, type, photo, dydziai_id)
+        VALUES (?, ?, ?, ?, ?)
     `;
 
     con.query(sql, [ //cia tvarka turi sutapt su lenteles uzrasais, ir is cia paimam ta nauja info ir sudedam i musu serveri ir po to matysim tai Tree List (paspaudus App mygtuka ir perkrovus puslapi)
         req.body.title,
         !req.body.height ? 0 : req.body.height, //jeigu aukscio lenteleje nieko neirasysim bus 0
         req.body.type,
-        req.body.photo
+        req.body.photo,
+        req.body.size//1000
     ], (err, results) => {
         if (err) {
             throw err;
@@ -534,16 +538,17 @@ app.post("/trees-comment/:id", (req, res) => {
 // UPDATE table_name
 // SET column1 = value1, column2 = value2, ...
 // WHERE condition;
+//1000 dadejau , dydziai_id = ? ir req.body.size,
 app.put("/trees-manager/:id", (req, res) => {
   let sql;//606 siunciam foto
   let args;//argsargumentai
     if('' === req.body.photo && req.body.del == 0) {//jeigu tuscias stringas yra foto, tai nerodom nuotraukos rodom tik name  type height
       sql = `
         UPDATE trees
-        SET name = ?, type = ?, height = ?
+        SET name = ?, type = ?, height = ?, dydziai_id = ?
         WHERE id = ?
     `;
-      args = [req.body.title, req.body.type, req.body.height, req.params.id];
+      args = [req.body.title, req.body.type, req.body.height,req.body.size, req.params.id];
     } else if(1 == req.body.del) {// jeigu yra 1 trinsim foto(photo bus null)
         sql = `
         UPDATE trees
@@ -624,6 +629,20 @@ app.post("/trees-size", (req, res) => {
       res.send(results);
     }
   );
+});
+
+//1000 istrinti size 
+app.delete("/trees-manager-sizes/:id", (req, res) => {
+  const sql = `
+        DELETE FROM dydziai
+        WHERE id = ?
+        `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(result);
+  });
 });
 
 //+
